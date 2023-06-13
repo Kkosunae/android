@@ -1,4 +1,4 @@
-package com.example.kkosunae
+package com.kkosunae
 
 import org.junit.Test
 
