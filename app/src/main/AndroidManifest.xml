@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Kkosunae"
         android:name=".GlobalApplication"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.m3lw8o5fjq"
+            android:value="m3lw8o5fjq"/>
         <activity
             android:name="com.kkosunae.MainActivity"
             android:exported="true">

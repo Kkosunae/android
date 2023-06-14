@@ -51,4 +51,10 @@ dependencies {
     implementation "com.kakao.sdk:v2-share:2.14.0" // 메시지(카카오톡 공유)
     implementation "com.kakao.sdk:v2-navi:2.14.0" // 카카오내비
     implementation "com.kakao.sdk:v2-friend:2.14.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
+    implementation "com.naver.maps:map-sdk:3.16.0" // naver map
+
+    implementation "com.android.support:support-compat:28.0.0"
+    // Google Play Service
+    implementation("com.google.android.gms:play-services-location:17.1.0")
+
 }
