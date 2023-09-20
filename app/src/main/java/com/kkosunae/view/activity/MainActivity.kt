@@ -1,4 +1,4 @@
-package com.kkosunae
+package com.kkosunae.view.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.kkosunae.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.kkosunae.databinding.ActivityMainBinding
-import com.kkosunae.databinding.KakaologinfragmentBinding
+import com.kkosunae.view.fragment.*
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -29,20 +28,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
         val keyHash = Utility.getKeyHash(this)
         Log.d("MainActivity", "keyHash : " +keyHash)
-        binding.loginButtonMain.setOnClickListener { item ->
-            initKakaoLogin()
-        }
+
 
         initNaverMap();
         initBottomNavigation()
 
     }
     private fun initBottomNavigation() {
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, KakaoLoginFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, HomeFragment()).commit()
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.main -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, KakaoLoginFragment()).commit()
-                R.id.second -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, NaverMapFragment() ).commit()
+                R.id.navi_menu_home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
+                R.id.navi_menu_map -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MapFragment() ).commit()
+                R.id.navi_menu_point -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
+                R.id.navi_menu_community -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
+                R.id.navi_menu_mypage -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
 
 
             }
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
             if (error != null) {
                 Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, KakaoLoginActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun initNaverMap() {
         val fm = supportFragmentManager
         //MapFragment 객체 얻기
-        val mapFragment = fm.findFragmentById(R.id.naver_map) as MapFragment?
+        val mapFragment = fm.findFragmentById(R.id.fragment_map) as MapFragment?
             ?: MapFragment.newInstance()
         //NaverMap 객체가 준비되면 OnMapReady() 콜백 메서드 호출
         mapFragment.getMapAsync(this)

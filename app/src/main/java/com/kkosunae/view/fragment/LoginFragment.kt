@@ -1,4 +1,4 @@
-package com.kkosunae
+package com.kkosunae.view.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -14,10 +14,12 @@ import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.kkosunae.databinding.KakaologinfragmentBinding
+import com.kkosunae.R
+import com.kkosunae.databinding.FragmentLoginBinding
+import com.kkosunae.view.activity.MainActivity
 
-class KakaoLoginFragment : Fragment(), View.OnClickListener{
-    lateinit var binding: KakaologinfragmentBinding
+class LoginFragment : Fragment(), View.OnClickListener{
+    lateinit var binding: FragmentLoginBinding
     lateinit var mContext: MainActivity
 
     override fun onAttach(context: Context) {
@@ -29,7 +31,7 @@ class KakaoLoginFragment : Fragment(), View.OnClickListener{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = KakaologinfragmentBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }

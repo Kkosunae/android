@@ -2,16 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/main"
+        android:id="@+id/navi_menu_home"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_background"
-        android:title="Home"/>
+        android:title="@string/menu_home"/>
     <item
-        android:id="@+id/second"
+        android:id="@+id/navi_menu_map"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_background"
-        android:title="second"/>
-
+        android:title="@string/menu_map"/>
+    <item
+        android:id="@+id/navi_menu_point"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menu_point"/>
+    <item
+        android:id="@+id/navi_menu_community"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menu_community"/>
+    <item
+        android:id="@+id/navi_menu_mypage"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menu_mypage"/>
 </menu>

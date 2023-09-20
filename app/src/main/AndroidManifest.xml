@@ -17,7 +17,7 @@
             android:name="com.naver.maps.map.m3lw8o5fjq"
             android:value="m3lw8o5fjq"/>
         <activity
-            android:name="com.kkosunae.MainActivity"
+            android:name="com.kkosunae.view.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
                     android:scheme="kakao4a705167f1b89e0ab9347e08a2540f6f" />
             </intent-filter>
         </activity>
-        <activity android:name=".KakaoLoginActivity"/>
+        <activity android:name=".view.activity.LoginActivity"/>
     </application>
 
 </manifest>
