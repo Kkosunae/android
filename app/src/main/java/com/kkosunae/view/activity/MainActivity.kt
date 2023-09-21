@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.kkosunae.R
 import com.kakao.sdk.common.util.Utility
@@ -17,7 +19,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
-    var TAG:String = "MainActivity"
+    val TAG : String = "MainActivity"
     lateinit var binding: ActivityMainBinding
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
@@ -43,8 +45,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 R.id.navi_menu_point -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
                 R.id.navi_menu_community -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
                 R.id.navi_menu_mypage -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
-
-
             }
             true
         }
@@ -98,6 +98,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
            return
        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_search -> Log.d(TAG, "menu_search click!")
+            R.id.menu_setting -> Log.d(TAG, "menu_setting click!")
+            else -> null
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
