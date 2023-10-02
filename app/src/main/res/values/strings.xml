@@ -8,4 +8,10 @@
     <string name="menu_community">community</string>
     <string name="menu_mypage">mypage</string>
 
+    <!--    tool bar title    -->
+    <string name="toolbar_menu_home">꼬순내</string>
+    <string name="toolbar_menu_map">지도</string>
+    <string name="toolbar_menu_point">포인트</string>
+    <string name="toolbar_menu_community">커뮤니티</string>
+    <string name="toolbar_menu_mypage">마이페이지</string>
 </resources>

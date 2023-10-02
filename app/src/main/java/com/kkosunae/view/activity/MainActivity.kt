@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val keyHash = Utility.getKeyHash(this)
         Log.d("MainActivity", "keyHash : " +keyHash)
-
+        setSupportActionBar(binding.mainToolbar)
         initObserver()
         initBottomNavigation()
     }
@@ -36,11 +36,28 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getCurrentTab().observe(this, Observer {it ->
             Log.d("MainActivity", "observe it : " + it)
             when (it) {
-                1 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
-                2 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
-                3 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
-                4 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
-                5 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
+                1 -> {
+                    binding.mainToolbar.setTitle(R.string.toolbar_menu_home)
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
+                }
+                2 -> {
+                    binding.mainToolbar.setTitle(R.string.toolbar_menu_map)
+                    Log.d("MainActivity", "clear()")
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
+
+                }
+                3 -> {
+                    binding.mainToolbar.setTitle(R.string.toolbar_menu_point)
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
+                }
+                4 -> {
+                    binding.mainToolbar.setTitle(R.string.toolbar_menu_community)
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
+                }
+                5 -> {
+                    binding.mainToolbar.setTitle(R.string.toolbar_menu_mypage)
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
+                }
             }
         })
     }
@@ -79,12 +96,11 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Log.d("MainActivity", "inflate()")
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_search -> Log.d(TAG, "menu_search click!")
@@ -93,5 +109,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

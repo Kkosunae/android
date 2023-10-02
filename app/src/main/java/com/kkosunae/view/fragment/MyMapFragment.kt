@@ -2,9 +2,8 @@ package com.kkosunae.view.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kkosunae.R
 import com.kkosunae.databinding.FragmentMapBinding
@@ -22,6 +21,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
     ): View? {
         Log.e(TAG,"onCreateView()")
         binding = FragmentMapBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -54,4 +54,12 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
         marker.map = naverMap
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.appbar_map_menu, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
 }
