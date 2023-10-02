@@ -7,15 +7,19 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.kkosunae.R
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.kkosunae.databinding.ActivityMainBinding
 import com.kkosunae.view.fragment.*
+import com.kkosunae.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     val TAG : String = "MainActivity"
-    lateinit var binding: ActivityMainBinding
+    lateinit var binding : ActivityMainBinding
+    val mainViewModel : MainViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,19 +29,37 @@ class MainActivity : AppCompatActivity() {
         val keyHash = Utility.getKeyHash(this)
         Log.d("MainActivity", "keyHash : " +keyHash)
 
-
+        initObserver()
         initBottomNavigation()
-
+    }
+    private fun initObserver() {
+        mainViewModel.getCurrentTab().observe(this, Observer {it ->
+            Log.d("MainActivity", "observe it : " + it)
+            when (it) {
+                1 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
+                2 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
+                3 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
+                4 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
+                5 -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
+            }
+        })
     }
     private fun initBottomNavigation() {
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, HomeFragment()).commit()
+        Log.d("MainActivity", "initBottomNavigation")
+//        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, HomeFragment()).commit()
         binding.bnvMain.setOnItemSelectedListener { item ->
+            Log.d("MainActivity", "initBottomNavigation item : " + item)
             when (item.itemId) {
-                R.id.navi_menu_home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
-                R.id.navi_menu_map -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
-                R.id.navi_menu_point -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
-                R.id.navi_menu_community -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
-                R.id.navi_menu_mypage -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
+//                R.id.navi_menu_home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
+//                R.id.navi_menu_map -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
+//                R.id.navi_menu_point -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
+//                R.id.navi_menu_community -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
+//                R.id.navi_menu_mypage -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
+                R.id.navi_menu_home -> mainViewModel.setCurrentTab(1)
+                R.id.navi_menu_map -> mainViewModel.setCurrentTab(2)
+                R.id.navi_menu_point -> mainViewModel.setCurrentTab(3)
+                R.id.navi_menu_community -> mainViewModel.setCurrentTab(4)
+                R.id.navi_menu_mypage -> mainViewModel.setCurrentTab(5)
             }
             true
         }
