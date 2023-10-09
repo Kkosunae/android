@@ -1,5 +1,6 @@
 package com.kkosunae.view.fragment
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -14,6 +15,7 @@ import com.naver.maps.map.overlay.Marker
 class MyMapFragment : Fragment(), OnMapReadyCallback{
     val TAG : String = "MyMapFragment"
     lateinit var binding: FragmentMapBinding
+    private var isFabOpen = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +41,25 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
                 fm.beginTransaction().add(R.id.fragment_container_map, it).commit()
             }
         mapFragment.getMapAsync(this)
+
+        binding.mapFabFilter.setOnClickListener{
+            toggleFab()
+        }
+    }
+    private fun toggleFab() {
+        // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
+        if (isFabOpen) {
+            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 45f, 0f).apply { start() }
+        } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
+            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 440f).apply { start() }
+            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 220f).apply { start() }
+            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 0f, 45f).apply { start() }
+        }
+
+        isFabOpen = !isFabOpen
+
     }
 
     override fun onMapReady(naverMap: NaverMap) {
@@ -62,4 +83,5 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
     }
+
 }
