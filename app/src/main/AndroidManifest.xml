@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kkosunae">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,24 +14,35 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kkosunae"
-        android:name=".GlobalApplication"
         tools:targetApi="31">
+
         <meta-data
             android:name="com.naver.maps.map.m3lw8o5fjq"
-            android:value="m3lw8o5fjq"/>
+            android:value="m3lw8o5fjq" />
         <activity
-            android:name="com.kkosunae.view.activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".view.activity.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
         </activity>
         <activity
-            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:launchMode="singleTask"
+            android:name=".view.activity.MainActivity"
             android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -40,7 +54,7 @@
                     android:scheme="kakao4a705167f1b89e0ab9347e08a2540f6f" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.LoginActivity"/>
+        <activity android:name=".view.activity.LoginActivity" />
     </application>
 
 </manifest>
