@@ -10,4 +10,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Kkosunae Color-->
+    <color name="colorVisVis">#FFE888</color>
+    <color name="colorGoldenYellow">#F7C451</color>
+    <color name="colorShakespeare">#739ABB</color>
+    <color name="colorCream">#FFF7E1</color>
+    <color name="colorGreenLeaf">#467505</color>
+    <color name="colorOrangeRed">#FF4200</color>
+    <color name="colorNightBlack">#353535</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteSmoke">#F8F8F8</color>
+
 </resources>
