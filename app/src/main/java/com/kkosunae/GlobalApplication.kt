@@ -10,6 +10,6 @@ class GlobalApplication : Application() {
         NaverMapSdk.getInstance(this).client =
                 NaverMapSdk.NaverCloudPlatformClient("m3lw8o5fjq")
         //kakao sdk init
-        KakaoSdk.init(this, "4a705167f1b89e0ab9347e08a2540f6f");
+        KakaoSdk.init(this, getString(R.string.kakao_app_key));
     }
 }

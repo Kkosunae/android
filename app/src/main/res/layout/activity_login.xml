@@ -10,5 +10,12 @@
         android:src="@drawable/kakao_login_medium_narrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_google_login_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/google_signin_neutral_sq_1x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_kakao_login_activity"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

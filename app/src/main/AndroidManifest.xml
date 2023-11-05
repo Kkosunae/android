@@ -45,15 +45,15 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="oauth"
-                    android:scheme="kakao4a705167f1b89e0ab9347e08a2540f6f" />
+                    android:scheme="kakaoae6bcf099a4885a217f4cd8a63548c5e" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activity.LoginActivity" />
     </application>
 

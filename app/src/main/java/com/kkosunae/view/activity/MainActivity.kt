@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val keyHash = Utility.getKeyHash(this)
-        Log.d("MainActivity", "keyHash : " +keyHash)
         setSupportActionBar(binding.mainToolbar)
         initObserver()
         initBottomNavigation()
