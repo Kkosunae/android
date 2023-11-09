@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainToolbar)
         initObserver()
         initBottomNavigation()
+
     }
     private fun initObserver() {
         mainViewModel.getCurrentTab().observe(this, Observer {it ->
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initBottomNavigation() {
         Log.d("MainActivity", "initBottomNavigation")
+        binding.bnvMain.itemIconTintList = null
 //        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, HomeFragment()).commit()
         binding.bnvMain.setOnItemSelectedListener { item ->
             Log.d("MainActivity", "initBottomNavigation item : " + item)

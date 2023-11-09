@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Kkosunae" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/sub_color_baise</item>
+        <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryVariant">@color/colorVisVis</item>
         <item name="colorOnPrimary">@color/colorVisVis</item>
         <!-- Secondary brand color. -->

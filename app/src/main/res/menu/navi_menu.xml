@@ -5,30 +5,30 @@
         android:id="@+id/navi_menu_home"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_bottom_home"
         android:title="@string/menu_home"/>
     <item
         android:id="@+id/navi_menu_map"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_bottom_map"
         android:title="@string/menu_map"/>
-    <item
-        android:id="@+id/navi_menu_point"
-        app:showAsAction="ifRoom"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/menu_point"/>
     <item
         android:id="@+id/navi_menu_community"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_bottom_commu"
         android:title="@string/menu_community"/>
+    <item
+        android:id="@+id/navi_menu_point"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_point"
+        android:title="@string/menu_point"/>
     <item
         android:id="@+id/navi_menu_mypage"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_bottom_mypage"
         android:title="@string/menu_mypage"/>
 </menu>

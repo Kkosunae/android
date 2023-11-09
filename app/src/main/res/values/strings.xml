@@ -2,11 +2,11 @@
     <string name="app_name">Kkosunae</string>
 
     <!--    bottom navigation menu title    -->
-    <string name="menu_home">home</string>
-    <string name="menu_map">map</string>
-    <string name="menu_point">point</string>
-    <string name="menu_community">community</string>
-    <string name="menu_mypage">mypage</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_map">지도</string>
+    <string name="menu_community">커뮤</string>
+    <string name="menu_point">포인트</string>
+    <string name="menu_mypage">마이</string>
 
     <!--    tool bar title    -->
     <string name="toolbar_menu_home">꼬순내</string>

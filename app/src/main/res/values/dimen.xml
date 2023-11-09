@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="home_layout_margin_start">20dp</dimen>
-    <dimen name="home_layout_margin_end">20dp</dimen>
-    <dimen name="home_layout_margin_top">20dp</dimen>
-    <dimen name="home_layout_margin_bottom">20dp</dimen>
-
-
+    <!--  home layout 1  -->
+    <dimen name="home_main_layout_margin_start">12dp</dimen>
+    <dimen name="home_main_layout_margin_end">12dp</dimen>
+    <dimen name="home_main_layout_margin_top">19dp</dimen>
+    <dimen name="home_main_layout_margin_bottom">12dp</dimen>
+    <!--  home layout margin type2  -->
+    <dimen name="home_walk_layout_margin_start">24dp</dimen>
+    <dimen name="home_walk_layout_margin_end">24dp</dimen>
 
 </resources>

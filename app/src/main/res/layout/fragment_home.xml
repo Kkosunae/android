@@ -14,89 +14,102 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/home_layout_1"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/home_main_layout"
+                android:layout_width="366dp"
+                android:layout_height="167dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/home_layout_margin_start"
-                android:layout_marginEnd="@dimen/home_layout_margin_end"
-                android:layout_marginTop="@dimen/home_layout_margin_top"
-                android:background="@color/colorVisVis">
-                <TextView
-                    android:id="@+id/layout1_text1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="바로 시작하기"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="10dp"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_search"
-                    app:layout_constraintStart_toEndOf="@+id/layout1_text1"
-                    app:layout_constraintBottom_toBottomOf="@+id/layout1_text1"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="18dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="10dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <TextView
+                        android:id="@+id/layout1_text1"
+                        android:layout_width="132dp"
+                        android:layout_height="31dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="바로 시작하기"
+                        android:textSize="20sp"
+                        android:gravity="top|end"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/layout1_text1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/ic_action_search" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/home_layout_2"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/home_walk_layout"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="136dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_layout_1"
-                android:layout_marginStart="@dimen/home_layout_margin_start"
-                android:layout_marginEnd="@dimen/home_layout_margin_end"
-                android:layout_marginTop="30dp"
-                android:background="@color/colorVisVis">
-                <ImageView
-                    android:id="@+id/home_iv_circle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-                <TextView
-                    android:id="@+id/home_tv_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="내가 찍은 발도장"
-                    android:fontFamily="@font/nanum_r"
-                    app:layout_constraintStart_toEndOf="@+id/home_iv_circle"
-                    app:layout_constraintTop_toTopOf="@id/home_iv_circle"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toEndOf="@id/home_iv_circle"
-                    app:layout_constraintBottom_toBottomOf="@id/home_iv_circle"/>
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    android:background="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/home_main_layout"
+                android:layout_marginStart="@dimen/home_walk_layout_margin_start"
+                android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="10dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/home_iv_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/home_reward_graph_default"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginStart="@dimen/home_walk_layout_margin_start"
+                        />
+                    <TextView
+                        android:id="@+id/home_tv_2"
+                        android:layout_width="72dp"
+                        android:layout_height="42dp"
+                        android:text="다음 보상까지"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/nanum_r"
+                        app:layout_constraintStart_toEndOf="@+id/home_iv_circle"
+                        app:layout_constraintTop_toTopOf="@id/home_iv_circle"
+                        android:layout_marginTop="20dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textSize="30sp"
+                        app:layout_constraintStart_toEndOf="@id/home_iv_circle"
+                        app:layout_constraintBottom_toBottomOf="@id/home_iv_circle"/>
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_layout_3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_layout_2"
+                app:layout_constraintTop_toBottomOf="@+id/home_walk_layout"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginStart="@dimen/home_layout_margin_start"
-                android:layout_marginEnd="@dimen/home_layout_margin_end"
-                android:layout_marginTop="@dimen/home_layout_margin_top"
+                android:layout_marginStart="@dimen/home_walk_layout_margin_start"
+                android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_home"
@@ -105,7 +118,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="20dp"
                     android:text="핫 발자국"
                     android:textSize="20dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -114,6 +126,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_rv"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
