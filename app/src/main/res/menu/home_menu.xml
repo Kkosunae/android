@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_menu_alam"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:icon="@drawable/icon_alam_default"
+        android:title="alam"/>
+
+</menu>

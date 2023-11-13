@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.kkosunae.R
 import com.kkosunae.databinding.FragmentMapBinding
 import com.naver.maps.geometry.LatLng
@@ -23,7 +26,17 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
     ): View? {
         Log.e(TAG,"onCreateView()")
         binding = FragmentMapBinding.inflate(inflater)
-        setHasOptionsMenu(true)
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.map_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
         return binding.root
     }
 
@@ -74,14 +87,4 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
         marker.position = LatLng(37.4964860636, 127.028361548)
         marker.map = naverMap
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
-        inflater.inflate(R.menu.appbar_map_menu, menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
-
 }

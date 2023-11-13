@@ -96,17 +96,17 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Log.d("MainActivity", "inflate()")
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_search -> Log.d(TAG, "menu_search click!")
-            R.id.menu_setting -> Log.d(TAG, "menu_setting click!")
-            else -> null
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        Log.d("MainActivity", "inflate()")
+//        menuInflater.inflate(R.menu.main_menu, menu)
+//        return true
+//    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.menu_search -> Log.d(TAG, "menu_search click!")
+//            R.id.menu_setting -> Log.d(TAG, "menu_setting click!")
+//            else -> null
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 }

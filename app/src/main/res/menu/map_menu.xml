@@ -2,21 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/appbar_map_menu_search"
+        android:id="@+id/map_menu_search"
         app:showAsAction="always"
         android:enabled="true"
         android:icon="@drawable/ic_action_search"
         android:title="search"/>
     <item
-        android:id="@+id/appbar_map_menu_noti"
+        android:id="@+id/map_menu_alam"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/ic_action_noti"
-        android:title="setting"/>
-    <item
-        android:id="@+id/appbar_map_menu_setting"
-        app:showAsAction="always"
-        android:enabled="true"
-        android:icon="@drawable/ic_action_setting"
-        android:title="setting"/>
+        android:icon="@drawable/icon_alam_default"
+        android:title="alam"/>
+
 </menu>
