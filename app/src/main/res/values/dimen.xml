@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="home_appbar_imageview_margin_start">12dp</dimen>
+
     <!--  home layout 1  -->
     <dimen name="home_main_layout_margin_start">12dp</dimen>
     <dimen name="home_main_layout_margin_end">12dp</dimen>

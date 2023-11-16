@@ -11,7 +11,22 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/main_menu"/>
+        app:menu="@menu/main_menu">
+        <ImageView
+            android:id="@+id/main_toolbar_logo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/home_appbar_imageview_margin_start"
+            android:src="@drawable/icon_logo_toolbar"/>
+        <ImageView
+            android:id="@+id/main_toolbar_logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/home_appbar_imageview_margin_start"
+            android:src="@drawable/icon_appname_toolbar"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_main"

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -36,25 +37,30 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "observe it : " + it)
             when (it) {
                 1 -> {
-                    binding.mainToolbar.setTitle(R.string.toolbar_menu_home)
+                    binding.mainToolbar.setTitle("")
+                    visibleToolbarIcon(true)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
                 }
                 2 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_map)
+                    visibleToolbarIcon(false)
                     Log.d("MainActivity", "clear()")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
 
                 }
                 3 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_point)
+                    visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
                 }
                 4 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_community)
+                    visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
                 }
                 5 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_mypage)
+                    visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
                 }
             }
@@ -80,6 +86,16 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+    fun visibleToolbarIcon(boolean: Boolean) {
+        if (boolean) {
+            binding.mainToolbarLogo1.visibility = View.VISIBLE
+            binding.mainToolbarLogo2.visibility = View.VISIBLE
+        } else {
+            binding.mainToolbarLogo1.visibility = View.GONE
+            binding.mainToolbarLogo2.visibility = View.GONE
+        }
+
     }
     private fun initKakaoLogin() {
         // 로그인 정보 확인 후 로그인 필요 시 login activity로 이동.
