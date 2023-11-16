@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="0dp">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,21 +15,23 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|enterAlways">
             <androidx.cardview.widget.CardView
-                android:id="@+id/home_main_layout"
+                android:id="@+id/home_main_cardview"
                 android:layout_width="0dp"
                 android:layout_height="167dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="@dimen/home_main_layout_margin_start"
+                android:layout_marginEnd="@dimen/home_main_layout_margin_end"
+                android:layout_marginTop="@dimen/home_main_layout_margin_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="18dp"
-                app:cardCornerRadius="25dp"
-                app:cardElevation="10dp">
+                app:layout_constraintBottom_toTopOf="@+id/home_walk_layout"
+                app:cardCornerRadius="@dimen/home_main_layout_radius"
+                app:cardElevation="@dimen/home_main_layout_Elevation">
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/home_main_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/home_start_card"
+                    android:background="@drawable/home_mainbanner_background"
                     >
                     <TextView
                         android:id="@+id/tv_home_main_co"
@@ -78,7 +80,8 @@
                 android:layout_height="136dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_main_layout"
+                app:layout_constraintTop_toBottomOf="@+id/home_main_cardview"
+                app:layout_constraintBottom_toTopOf="@+id/home_layout_hotplace"
                 android:layout_marginStart="@dimen/home_walk_layout_margin_start"
                 android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:layout_marginTop="24dp"
@@ -132,6 +135,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_walk_layout"
+                app:layout_constraintBottom_toTopOf="@+id/home_layout_tips"
                 android:layout_marginStart="@dimen/home_walk_layout_margin_start"
                 android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:layout_marginTop="24dp"
@@ -182,6 +186,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_layout_hotplace"
+                app:layout_constraintBottom_toTopOf="@+id/home_tv"
                 android:layout_marginStart="@dimen/home_walk_layout_margin_start"
                 android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:orientation="vertical">

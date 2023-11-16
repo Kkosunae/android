@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/home_mainbanner_back_top"
+        android:drawable="@drawable/home_mainbanner_background_top"
+        android:gravity="top"
+        />
+    <item
+        android:drawable="@drawable/home_mainbanner_background_bottom"
+        android:gravity="bottom"
+        />
+    <item
+        android:drawable="@drawable/home_mainbanner_dog"
+        android:gravity="end|bottom"
+        />
+</layer-list>

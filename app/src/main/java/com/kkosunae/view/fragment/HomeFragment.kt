@@ -1,14 +1,15 @@
 package com.kkosunae.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kkosunae.R
+import com.kkosunae.Utils
 import com.kkosunae.adapter.HomeHotPlaceListAdapter
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.adapter.HomeTipsListAdapter
@@ -17,8 +18,9 @@ import com.kkosunae.model.HomeHotPlaceItem
 import com.kkosunae.model.HomeItem
 import com.kkosunae.model.HomeTipsItem
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
+    private val TAG = "HomeFragment"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +40,7 @@ class HomeFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
+        binding.tvHomeMainStart.setOnClickListener(this)
         return binding.root
     }
 
@@ -86,4 +89,22 @@ class HomeFragment : Fragment() {
         rvTips.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.tv_home_main_start -> {
+                Log.d(TAG, "onClick - home_start")
+                startWalk()
+            }
+        }
+    }
+    private fun startWalk() {
+        // main banner background 수정
+        var drawable = Utils.replaceBackgroundInLayerList(requireContext(), null, R.drawable.home_mainbanner_background, R.id.home_mainbanner_back_top)
+        binding.homeMainLayout.background = drawable
+
+        // start walk api 호출
+        // 일시정지 / 계속, 정지 버튼, 시간, 거리 표시
+    }
+
 }

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="home_appbar_imageview_margin_start">12dp</dimen>
 
-    <!--  home layout 1  -->
+<!--  home tab  -->
+    <!--  home toolbar  -->
+    <dimen name="home_appbar_imageview_margin_start">12dp</dimen>
+    <!--  home main banner  -->
     <dimen name="home_main_layout_margin_start">12dp</dimen>
     <dimen name="home_main_layout_margin_end">12dp</dimen>
-    <dimen name="home_main_layout_margin_top">19dp</dimen>
-    <dimen name="home_main_layout_margin_bottom">12dp</dimen>
-    <!--  home layout margin type2  -->
+    <dimen name="home_main_layout_margin_top">16dp</dimen>
+    <dimen name="home_main_layout_margin_bottom">491dp</dimen>
+    <dimen name="home_main_layout_radius">22dp</dimen>
+    <dimen name="home_main_layout_Elevation">10dp</dimen>
+
+    <!--  home statistics  -->
+
+    <!--  home hot place  -->
+
+    <!--  home tips  -->
     <dimen name="home_walk_layout_margin_start">24dp</dimen>
     <dimen name="home_walk_layout_margin_end">24dp</dimen>
+    <!--  home hot walk  -->
 
 </resources>
