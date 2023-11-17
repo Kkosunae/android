@@ -11,8 +11,8 @@ import com.kkosunae.model.HomeItem
 class HomeListAdapter (val itemList : ArrayList<HomeItem>) : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>(){
 
     inner class HomeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        var tvTitle = itemView.findViewById<TextView>(R.id.item_tv_title)
-        var tvContent = itemView.findViewById<TextView>(R.id.item_tv_content)
+        var tvTitle = itemView.findViewById<TextView>(R.id.item_tv_name)
+        var tvContent = itemView.findViewById<TextView>(R.id.item_tv_contents)
 
     }
 

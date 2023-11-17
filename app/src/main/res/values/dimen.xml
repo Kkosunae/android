@@ -19,6 +19,11 @@
     <!--  home tips  -->
     <dimen name="home_walk_layout_margin_start">24dp</dimen>
     <dimen name="home_walk_layout_margin_end">24dp</dimen>
+    <dimen name="home_walk_layout_margin_top">12dp</dimen>
+
+    <dimen name="home_walk_chart_margin_start">12dp</dimen>
+    <dimen name="home_walk_chart_margin_top">24dp</dimen>
+    <dimen name="home_walk_chart_margin_bottom">24dp</dimen>
     <!--  home hot walk  -->
 
 </resources>

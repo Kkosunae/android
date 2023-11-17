@@ -113,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
             Log.e("Google account",email)
             Log.e("Google account",googletoken)
             Log.e("Google account", googletokenAuth)
-            // TODO: 로그인 정보 회원인지 확인하는 작업 필요. 
+            // TODO: 로그인 정보 회원인지 확인하는 작업 필요.
             val intent = Intent(this, MainActivity::class.java)
             mainViewModel.setIsLogin(true)
             startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
