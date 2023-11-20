@@ -3,9 +3,11 @@ package com.kkosunae.view.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kkosunae.R
@@ -21,6 +23,7 @@ import com.kkosunae.model.HomeTipsItem
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
     private val TAG = "HomeFragment"
+    private var textview: TextView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,8 +42,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
 
-        binding.tvHomeMainStart.setOnClickListener(this)
         return binding.root
     }
 
@@ -89,22 +92,27 @@ class HomeFragment : Fragment(), View.OnClickListener {
         rvTips.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     }
-
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.tv_home_main_start -> {
-                Log.d(TAG, "onClick - home_start")
-                startWalk()
+                initMainBanner(1)
             }
         }
     }
-    private fun startWalk() {
-        // main banner background 수정
-        var drawable = Utils.replaceBackgroundInLayerList(requireContext(), null, R.drawable.home_mainbanner_background, R.id.home_mainbanner_back_top)
-        binding.homeMainLayout.background = drawable
-
-        // start walk api 호출
-        // 일시정지 / 계속, 정지 버튼, 시간, 거리 표시
+    private fun initMainBanner(state : Int) {
+        if (state == 0) {
+            childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
+        } else {
+            childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragment()).commit()
+        }
     }
+//    private fun startWalk() {
+//        // main banner background 수정
+//        var drawable = Utils.replaceBackgroundInLayerList(requireContext(), null, R.drawable.home_mainbanner_background, R.id.home_mainbanner_back_top)
+//        binding.homeMainLayout.background = drawable
+//
+//        // start walk api 호출
+//        // 일시정지 / 계속, 정지 버튼, 시간, 거리 표시
+//    }
 
 }

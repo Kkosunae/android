@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Kkosunae" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Kkosunae" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryVariant">@color/colorVisVis</item>
@@ -19,5 +19,14 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.Kkosunae</item>
     </style>
-
+    <style name="BoldText40Black">
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/colorNightBlack</item>
+        <item name="android:fontFamily">@font/nanum_b</item>
+    </style>
+    <style name="BoldText20Black">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorNightBlack</item>
+        <item name="android:fontFamily">@font/nanum_b</item>
+    </style>
 </resources>

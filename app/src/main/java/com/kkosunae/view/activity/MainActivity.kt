@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainToolbar)
         initObserver()
         initBottomNavigation()
-
     }
     private fun initObserver() {
         mainViewModel.getCurrentTab().observe(this, Observer {it ->
