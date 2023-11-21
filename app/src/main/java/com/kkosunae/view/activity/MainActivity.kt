@@ -3,18 +3,19 @@ package com.kkosunae.view.activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.kkosunae.R
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.kkosunae.databinding.ActivityMainBinding
 import com.kkosunae.view.fragment.*
@@ -30,9 +31,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setFullScreen()
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        binding.mainLayout.setPadding(0, getStatusBarHeight(this), 0, 0)
         setSupportActionBar(binding.mainToolbar)
         initObserver()
         initBottomNavigation()
+    }
+    fun getStatusBarHeight(context : Context) : Int {
+        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+
+        return if (resourceId > 0) {
+            context.resources.getDimensionPixelSize(resourceId)
+        } else {
+            0
+        }
+    }
+    private fun setFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            window.insetsController?.hide(
+//                WindowInsets.Type.statusBars() or
+                        WindowInsets.Type.navigationBars()
+            )
+            window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        } else {
+            window.decorView.systemUiVisibility =
+                (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
+        }
     }
     private fun initObserver() {
         mainViewModel.getCurrentTab().observe(this, Observer {it ->
