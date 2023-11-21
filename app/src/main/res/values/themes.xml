@@ -11,7 +11,9 @@
         <item name="colorOnSecondary">@color/sub_color_baise</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/colorWhite</item>
     </style>
     <!-- Splash screen Theme-->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

@@ -1,17 +1,15 @@
 package com.kkosunae.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kkosunae.R
-import com.kkosunae.Utils
 import com.kkosunae.adapter.HomeHotPlaceListAdapter
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.adapter.HomeTipsListAdapter
@@ -19,20 +17,22 @@ import com.kkosunae.databinding.FragmentHomeBinding
 import com.kkosunae.model.HomeHotPlaceItem
 import com.kkosunae.model.HomeItem
 import com.kkosunae.model.HomeTipsItem
+import com.kkosunae.viewmodel.MainViewModel
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
     private val TAG = "HomeFragment"
-    private var textview: TextView? = null
+    private val mainViewModel : MainViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater)
+        initObserver()
         // menu item 설정
         val menuHost: MenuHost = requireActivity()
-
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.home_menu, menu)
@@ -42,8 +42,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-        childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
-
         return binding.root
     }
 
@@ -95,24 +93,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.tv_home_main_start -> {
-                initMainBanner(1)
+                mainViewModel.setHomeMainBannerState(1)
+            }
+            R.id.home_main_state_pause_button -> {
+                mainViewModel.setHomeMainBannerState(0)
             }
         }
     }
-    private fun initMainBanner(state : Int) {
-        if (state == 0) {
-            childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
-        } else {
-            childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragment()).commit()
-        }
+    private fun initObserver() {
+        mainViewModel.getHomeMainBannerState().observe(viewLifecycleOwner, Observer { it ->
+            when (it) {
+                0 -> {
+                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
+                }
+                1 -> {
+                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
+                }
+            }
+        })
     }
-//    private fun startWalk() {
-//        // main banner background 수정
-//        var drawable = Utils.replaceBackgroundInLayerList(requireContext(), null, R.drawable.home_mainbanner_background, R.id.home_mainbanner_back_top)
-//        binding.homeMainLayout.background = drawable
-//
-//        // start walk api 호출
-//        // 일시정지 / 계속, 정지 버튼, 시간, 거리 표시
-//    }
-
 }

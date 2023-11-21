@@ -1,6 +1,8 @@
 package com.kkosunae.view.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.kkosunae.R
 import com.kakao.sdk.common.util.Utility
@@ -18,9 +21,9 @@ import com.kkosunae.view.fragment.*
 import com.kkosunae.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    val TAG : String = "MainActivity"
+    private val TAG : String = "MainActivity"
     lateinit var binding : ActivityMainBinding
-    val mainViewModel : MainViewModel by viewModels()
+    private val mainViewModel : MainViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,10 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initObserver() {
         mainViewModel.getCurrentTab().observe(this, Observer {it ->
-            Log.d("MainActivity", "observe it : " + it)
+            Log.d("MainActivity", "observe it : $it")
             when (it) {
                 1 -> {
-                    binding.mainToolbar.setTitle("")
+                    binding.mainToolbar.title = ""
                     visibleToolbarIcon(true)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
                 }
@@ -68,15 +71,10 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         Log.d("MainActivity", "initBottomNavigation")
         binding.bnvMain.itemIconTintList = null
-//        supportFragmentManager.beginTransaction().add(R.id.fragment_container_main, HomeFragment()).commit()
+        binding.bnvMain.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorWhite))
         binding.bnvMain.setOnItemSelectedListener { item ->
-            Log.d("MainActivity", "initBottomNavigation item : " + item)
+            Log.d("MainActivity", "initBottomNavigation item : $item")
             when (item.itemId) {
-//                R.id.navi_menu_home -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
-//                R.id.navi_menu_map -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
-//                R.id.navi_menu_point -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
-//                R.id.navi_menu_community -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
-//                R.id.navi_menu_mypage -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
                 R.id.navi_menu_home -> mainViewModel.setCurrentTab(1)
                 R.id.navi_menu_map -> mainViewModel.setCurrentTab(2)
                 R.id.navi_menu_point -> mainViewModel.setCurrentTab(3)
@@ -86,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-    fun visibleToolbarIcon(boolean: Boolean) {
+    private fun visibleToolbarIcon(boolean: Boolean) {
         if (boolean) {
             binding.mainToolbarLogo1.visibility = View.VISIBLE
             binding.mainToolbarLogo2.visibility = View.VISIBLE
