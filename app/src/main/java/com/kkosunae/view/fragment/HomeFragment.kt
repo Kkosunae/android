@@ -1,7 +1,11 @@
 package com.kkosunae.view.fragment
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -18,12 +22,16 @@ import com.kkosunae.model.HomeHotPlaceItem
 import com.kkosunae.model.HomeItem
 import com.kkosunae.model.HomeTipsItem
 import com.kkosunae.viewmodel.MainViewModel
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
+    lateinit var mContext : Context
     private val TAG = "HomeFragment"
     private val mainViewModel : MainViewModel by activityViewModels()
-
+    private var mFootCount : Int = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,12 +50,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        // pirchart
+        initPieChart()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 
     private fun initRecyclerView() {
@@ -90,13 +106,41 @@ class HomeFragment : Fragment(), View.OnClickListener {
         rvTips.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     }
+    private fun initPieChart() {
+        val pieChart = binding.homeWalkPiechart
+        var value : Float = if (mFootCount < 15) {
+            (mFootCount * 7).toFloat()
+        } else {
+            100f
+        }
+        var value2 :Float = 100f - value
+        val entries = arrayListOf(
+            PieEntry(value, 0),
+            PieEntry(value2, 1)
+        )
+        val dataSet = PieDataSet(entries,"")
+        val colors = arrayListOf(
+            ContextCompat.getColor(mContext, R.color.colorVisVis),
+            ContextCompat.getColor(mContext, R.color.colorWhiteSmoke))
+        dataSet.colors = colors
+        dataSet.setDrawValues(false)
+        val data = PieData(dataSet)
+        pieChart.data = data
+        //하단 설명 비활성화
+        pieChart.legend.isEnabled = false
+        pieChart.isDrawHoleEnabled = true
+        pieChart.description = null
+        pieChart.invalidate()
+        binding.homeWalkDistanceTv.setOnClickListener(this)
+        binding.homeWalkNum.setOnClickListener(this)
+    }
     override fun onClick(v: View?) {
         when(v?.id) {
-            R.id.tv_home_main_start -> {
-                mainViewModel.setHomeMainBannerState(1)
+            R.id.home_walk_num -> {
+                mainViewModel.upFootCount()
             }
-            R.id.home_main_state_pause_button -> {
-                mainViewModel.setHomeMainBannerState(0)
+            R.id.home_walk_distance_tv -> {
+                mainViewModel.downFootCount()
             }
         }
     }
@@ -110,6 +154,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
                 }
             }
+        })
+        mainViewModel.footCount.observe(viewLifecycleOwner, Observer { it ->
+            Log.d("HomeFragment", "footCount observer it : $it")
+            mFootCount = it
+            Log.d("HomeFragment", "footCount observer mFootCount : $mFootCount")
+            binding.homeWalkNum.text = it.toString()
+            initPieChart()
         })
     }
 }

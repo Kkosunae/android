@@ -9,6 +9,7 @@ class MainViewModel : ViewModel(){
     private val _currentTab = MutableLiveData<Int>()
     private val _isLogin = MutableLiveData<Boolean>()
     private val _homeMainBannerState = MutableLiveData<Int>()
+    private val _footCount = MutableLiveData<Int>()
 
     val currentTab : LiveData<Int>
         get() = _currentTab
@@ -16,25 +17,38 @@ class MainViewModel : ViewModel(){
         get() = _isLogin
     val homeMainBannerState : LiveData<Int>
         get() = _homeMainBannerState
-
+    val footCount : LiveData<Int>
+        get() = _footCount
     init {
         // home 탭으로 초기화
         Log.d("MainViewModel", "init tab")
         _currentTab.postValue(1)
+        _homeMainBannerState.postValue(0)
+        _footCount.value = 0
     }
     fun setCurrentTab(index : Int) {
         _currentTab.postValue(index)
     }
-
     fun setIsLogin(index : Boolean) {
         _isLogin.postValue(index)
     }
-
-    init {
-        Log.d("MainViewModel", "init state")
-        _homeMainBannerState.postValue(0)
-    }
     fun setHomeMainBannerState(index : Int) {
         _homeMainBannerState.postValue(index)
+    }
+    fun upFootCount() {
+        Log.d("MainViewModel", "upFootCount : " + _footCount.value)
+        if(_footCount.value == 15) {
+            _footCount.value = 0
+        } else {
+            _footCount.value = _footCount.value?.plus(1)
+        }
+    }
+    fun downFootCount() {
+        Log.d("MainViewModel", "downFootCount : " + _footCount.value)
+        if(_footCount.value == 0) {
+
+        } else {
+            _footCount.value = _footCount.value?.minus(1)
+        }
     }
 }
