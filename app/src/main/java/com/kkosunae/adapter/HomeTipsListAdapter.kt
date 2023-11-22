@@ -14,7 +14,7 @@ import com.kkosunae.model.HomeHotPlaceItem
 import com.kkosunae.model.HomeItem
 import com.kkosunae.model.HomeTipsItem
 
-class HomeTipsListAdapter (private val list : ArrayList<HomeTipsItem>) : RecyclerView.Adapter<HomeTipsListAdapter.HomeViewHolder>(){
+class HomeTipsListAdapter (list : ArrayList<HomeTipsItem>) : RecyclerView.Adapter<HomeTipsListAdapter.HomeViewHolder>(){
     private val itemList: ArrayList<HomeTipsItem> = list
 
     inner class HomeViewHolder(private val binding: ItemHomeTipsBinding ) : RecyclerView.ViewHolder(binding.root) {

@@ -22,7 +22,7 @@ import kotlin.concurrent.thread
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var splashScreen: SplashScreen
-    val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        mainViewModel.getIsLogin().observe(this, Observer { it ->
+        mainViewModel.isLogin.observe(this, Observer { it ->
             if (it) {
                 val intent = Intent(this, MainActivity::class.java)
                 // 액티비티 스택 제거

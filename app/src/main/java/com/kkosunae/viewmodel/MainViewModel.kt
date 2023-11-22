@@ -1,48 +1,40 @@
 package com.kkosunae.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel(){
-    private var currentTab = MutableLiveData<Int>()
-    private var isLogin = MutableLiveData<Boolean>()
-    private var homeMainBannerState = MutableLiveData<Int>()
+    private val _currentTab = MutableLiveData<Int>()
+    private val _isLogin = MutableLiveData<Boolean>()
+    private val _homeMainBannerState = MutableLiveData<Int>()
 
-    fun getCurrentTab() : MutableLiveData<Int> {
-        if(currentTab == null) {
-            currentTab = MutableLiveData<Int>()
-        }
-        return currentTab
-    }
+    val currentTab : LiveData<Int>
+        get() = _currentTab
+    val isLogin : LiveData<Boolean>
+        get() = _isLogin
+    val homeMainBannerState : LiveData<Int>
+        get() = _homeMainBannerState
+
     init {
         // home 탭으로 초기화
-        getCurrentTab().postValue(1)
+        Log.d("MainViewModel", "init tab")
+        _currentTab.postValue(1)
     }
     fun setCurrentTab(index : Int) {
-        getCurrentTab().postValue(index)
+        _currentTab.postValue(index)
     }
 
-    fun getIsLogin() :MutableLiveData<Boolean> {
-        if(isLogin == null) {
-            isLogin = MutableLiveData<Boolean>(false)
-        }
-        return isLogin
-    }
     fun setIsLogin(index : Boolean) {
-        getIsLogin().postValue(index)
+        _isLogin.postValue(index)
     }
 
-    fun getHomeMainBannerState() : MutableLiveData<Int> {
-        if(homeMainBannerState == null) {
-            homeMainBannerState = MutableLiveData<Int>()
-        }
-        return homeMainBannerState
-    }
     init {
-        // home 탭으로 초기화
-        getHomeMainBannerState().value = 0
+        Log.d("MainViewModel", "init state")
+        _homeMainBannerState.postValue(0)
     }
     fun setHomeMainBannerState(index : Int) {
-        getHomeMainBannerState().postValue(index)
+        _homeMainBannerState.postValue(index)
     }
 }

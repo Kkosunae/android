@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun initObserver() {
-        mainViewModel.getCurrentTab().observe(this, Observer {it ->
+        mainViewModel.currentTab.observe(this, Observer {it ->
             Log.d("MainActivity", "observe it : $it")
             when (it) {
                 1 -> {

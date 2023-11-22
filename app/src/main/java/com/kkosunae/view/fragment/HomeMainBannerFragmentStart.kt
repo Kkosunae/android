@@ -45,7 +45,7 @@ class HomeMainBannerFragmentStart : Fragment(), View.OnClickListener {
         }
     }
     private fun initObserver() {
-        mainViewModel.getHomeMainBannerState().observe(viewLifecycleOwner, Observer { it ->
+        mainViewModel.homeMainBannerState.observe(viewLifecycleOwner, Observer { it ->
             Log.d("state", "it : $it" )
             when (it) {
                 0 -> {

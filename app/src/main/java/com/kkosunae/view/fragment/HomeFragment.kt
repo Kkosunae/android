@@ -101,7 +101,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
     private fun initObserver() {
-        mainViewModel.getHomeMainBannerState().observe(viewLifecycleOwner, Observer { it ->
+        mainViewModel.homeMainBannerState.observe(viewLifecycleOwner, Observer { it ->
             when (it) {
                 0 -> {
                     childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
