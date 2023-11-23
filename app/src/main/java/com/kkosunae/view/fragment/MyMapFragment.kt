@@ -2,23 +2,30 @@ package com.kkosunae.view.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.*
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kkosunae.R
 import com.kkosunae.databinding.FragmentMapBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 
-class MyMapFragment : Fragment(), OnMapReadyCallback{
+class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
     val TAG : String = "MyMapFragment"
     lateinit var binding: FragmentMapBinding
     private var isFabOpen = false
+    private lateinit var bottomSheetLayout : LinearLayoutCompat
+    private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayoutCompat>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +33,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
     ): View? {
         Log.e(TAG,"onCreateView()")
         binding = FragmentMapBinding.inflate(inflater)
+        initBottomSheet()
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -86,5 +94,22 @@ class MyMapFragment : Fragment(), OnMapReadyCallback{
         val marker = Marker()
         marker.position = LatLng(37.4964860636, 127.028361548)
         marker.map = naverMap
+    }
+    private fun initBottomSheet() {
+        bottomSheetLayout = binding.bottomSheet.root
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
+    }
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.map_button_modal_bottom_sheet -> {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+            }
+            R.id.map_button_persistent_bottom_sheet -> {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+            }
+        }
     }
 }

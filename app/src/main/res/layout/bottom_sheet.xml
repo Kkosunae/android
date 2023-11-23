@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="42dp"
-    app:behavior_fitToContents="true"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    android:layout_height="match_parent"
+    android:background="@color/colorNightBlack"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorCream"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/map_button_modal_bottom_sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
 
-    <Button
-        android:id="@+id/bottom_btn"
-        android:layout_width="160dp"
-        android:layout_height="32dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </Button>
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="modal_bottom_sheet"/>
+        <Button
+            android:id="@+id/map_button_persistent_bottom_sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="persistent_bottom_sheet"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottom_btn"
+        app:layout_constraintTop_toBottomOf="@id/map_button_persistent_bottom_sheet"
         android:layout_marginTop="10dp">
 
         <TextView
@@ -57,4 +69,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
