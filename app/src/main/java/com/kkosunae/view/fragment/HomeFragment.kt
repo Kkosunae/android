@@ -40,16 +40,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding = FragmentHomeBinding.inflate(inflater)
         initObserver()
         // menu item 설정
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.home_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return true
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        initMenuItem()
         // pirchart
         initPieChart()
 
@@ -65,7 +56,25 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onAttach(context)
         mContext = context
     }
+    private fun initMenuItem() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.home_menu, menu)
+            }
 
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    //Todo 클릭 시 알람 내역 API 호출
+                    // 확인한 알람, 미확인 알람 분리, 확인하지 않은 알람이 있다면 뱃지 표시
+                    // 지금까지 받은 알람 표시하는 화면으로 이동 (R->L)
+                    R.id.home_menu_alam -> Log.d(TAG, "home_menu_alam click!")
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+    }
     private fun initRecyclerView() {
         var itemList = ArrayList<HomeItem>()
         itemList.add(HomeItem("chlghduf", "sodyd"))
@@ -130,6 +139,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         pieChart.legend.isEnabled = false
         pieChart.isDrawHoleEnabled = true
         pieChart.description = null
+        pieChart.setTouchEnabled(false)
         pieChart.invalidate()
         binding.homeWalkDistanceTv.setOnClickListener(this)
         binding.homeWalkNum.setOnClickListener(this)

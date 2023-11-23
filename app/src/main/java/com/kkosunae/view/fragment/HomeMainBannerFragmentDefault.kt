@@ -28,6 +28,7 @@ class HomeMainBannerFragmentDefault : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.tv_home_main_start -> {
+                TODO("산책 시작 API 호출")
                 mainViewModel.setHomeMainBannerState(1)
 
             }
