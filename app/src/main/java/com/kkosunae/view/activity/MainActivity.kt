@@ -67,11 +67,13 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 1 -> {
                     binding.mainToolbar.title = ""
+                    supportActionBar?.show()
                     visibleToolbarIcon(true)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, HomeFragment()).commit()
                 }
                 2 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_map)
+                    supportActionBar?.hide()
                     visibleToolbarIcon(false)
                     Log.d("MainActivity", "clear()")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
@@ -79,16 +81,19 @@ class MainActivity : AppCompatActivity() {
                 }
                 3 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_point)
+                    supportActionBar?.show()
                     visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, PointFragment() ).commit()
                 }
                 4 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_community)
+                    supportActionBar?.show()
                     visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, CommunityFragment() ).commit()
                 }
                 5 -> {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_mypage)
+                    supportActionBar?.show()
                     visibleToolbarIcon(false)
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MypageFragment() ).commit()
                 }
