@@ -13,9 +13,12 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kkosunae.R
+import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.databinding.FragmentMapBinding
+import com.kkosunae.model.HomeItem
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -24,8 +27,8 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
     val TAG : String = "MyMapFragment"
     lateinit var binding: FragmentMapBinding
     private var isFabOpen = false
-    private lateinit var bottomSheetLayout : LinearLayoutCompat
-    private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayoutCompat>
+    private lateinit var bottomSheetLayout : LinearLayout
+    private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayout>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +69,22 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         binding.mapFabFilter.setOnClickListener{
             toggleFab()
         }
+        initRecyclerView()
     }
+    private fun initRecyclerView() {
+        var itemList = ArrayList<HomeItem>()
+        itemList.add(HomeItem("chlghduf", "sodyd"))
+        itemList.add(HomeItem("chlghduf", "sodyd"))
+        itemList.add(HomeItem("chlghduf", "sodyd"))
+        itemList.add(HomeItem("chlghduf", "sodyd"))
+        itemList.add(HomeItem("chlghduf", "sodyd"))
+        val recyclerView = binding.bottomSheet.mapBottomSheetRv
+        val recyclerAdapter = HomeListAdapter(itemList)
+        recyclerView.adapter = recyclerAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+    }
+
     private fun toggleFab() {
         // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
         if (isFabOpen) {
@@ -100,16 +118,10 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
         Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
     }
+
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.map_button_modal_bottom_sheet -> {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-            }
-            R.id.map_button_persistent_bottom_sheet -> {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-            }
         }
     }
 }

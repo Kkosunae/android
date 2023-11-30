@@ -1,72 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorNightBlack"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
     app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="80dp"
     android:orientation="vertical">
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorCream"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/map_button_modal_bottom_sheet"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+        android:src="@drawable/ic_bar_bottom_sheet"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center|top"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="깜이 님 주변 정보"
+        android:textSize="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"/>
 
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="modal_bottom_sheet"/>
-        <Button
-            android:id="@+id/map_button_persistent_bottom_sheet"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="persistent_bottom_sheet"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/map_bottom_sheet_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map_button_persistent_bottom_sheet"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="35dp" />
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
-            android:text="OOO님 주변 정보"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/testlayout"
-            android:layout_width="match_parent"
-            android:layout_height="1000dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text"
-            android:background="@color/black">
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/bottom_sheet_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:paddingHorizontal="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/testlayout" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>
