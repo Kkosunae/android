@@ -81,7 +81,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/home_walk_piechart_layout"/>
                     <TextView
                         android:id="@+id/home_walk_myfoot_tv"
-                        android:layout_width="wrap_content"qqq
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="내 발자국"
                         android:textSize="10dp"
