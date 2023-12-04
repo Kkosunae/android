@@ -194,7 +194,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="내 주변 핫플"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:fontFamily="@font/nanum_b"
+                    android:textColor="@color/colorNightBlack"/>
                 <TextView
                     android:id="@+id/tv_home_hotplace_locate"
                     android:layout_width="wrap_content"
@@ -204,7 +206,9 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/tv_home_hotplace_title"
                     android:layout_marginEnd="4dp"
                     android:text="송파구 잠실동"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp"
+                    android:fontFamily="@font/nanum_b"
+                    android:textColor="@color/colorBoulderGrey"/>
                 <ImageView
                     android:id="@+id/iv_home_hotplace_navigation"
                     android:layout_width="wrap_content"
@@ -222,9 +226,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_home_hotplace_title"
                     app:layout_constraintBottom_toBottomOf="parent"
-
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_layout_tips"
                 android:layout_width="0dp"
@@ -243,7 +247,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="펫스 앤 팁스"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:fontFamily="@font/nanum_b"
+                    android:textColor="@color/colorNightBlack"/>
                 <TextView
                     android:id="@+id/tv_home_tips_all"
                     android:layout_width="wrap_content"
@@ -253,7 +259,9 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/tv_home_tips_title"
                     android:layout_marginEnd="4dp"
                     android:text="모두보기"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp"
+                    android:fontFamily="@font/nanum_b"
+                    android:textColor="@color/colorBoulderGrey"/>
                 <ImageView
                     android:id="@+id/iv_home_tips_arrow"
                     android:layout_width="wrap_content"
@@ -282,7 +290,9 @@
                 android:layout_marginStart="@dimen/home_walk_layout_margin_start"
                 android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:text="핫 발자국"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/nanum_b"
+                android:textColor="@color/colorNightBlack"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv"
                 android:layout_width="0dp"

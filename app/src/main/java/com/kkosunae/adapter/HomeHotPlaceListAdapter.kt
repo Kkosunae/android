@@ -21,8 +21,7 @@ class HomeHotPlaceListAdapter (private val list : ArrayList<HomeHotPlaceItem>) :
             binding.itemHomeHotplaceIv.setImageResource(R.drawable.sample_img_dog)
             binding.itemHomeTvCategory.text = data.category
             binding.itemHomeTvTitle.text = data.title
-            binding.itemHomeHotplaceLayoutStarTvValue.text = data.star
-            binding.itemHomeHotplaceLayoutStarTvComment.text = data.comment
+            binding.itemHomeHotplaceDistance.text = data.distance.toString()+"m 이내"
 
             binding.itemHomeHotplaceLayout.setOnClickListener {
                 Log.d("HomeHotPlaceListAdapter", "click layout")
@@ -43,8 +42,8 @@ class HomeHotPlaceListAdapter (private val list : ArrayList<HomeHotPlaceItem>) :
         holder.bind(itemList[position])
     }
 
-    fun addData(image: Int, category: String, title : String, star : String, comment : String) {
-        itemList.add(HomeHotPlaceItem(image,category,title,star,comment))
+    fun addData(image: Int, category: String, title : String, distance : Int) {
+        itemList.add(HomeHotPlaceItem(image,category,title,distance))
         notifyItemInserted(itemList.size)
     }
 }

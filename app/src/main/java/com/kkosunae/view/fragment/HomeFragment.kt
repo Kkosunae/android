@@ -90,11 +90,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         // HomeHotPlaceItem
         var itemHotplace = ArrayList<HomeHotPlaceItem>()
-        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title1", "5.5", "111"))
-        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title2", "8.5", "222"))
-        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title3", "10.0", "333"))
-        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title4", "0.0", "444"))
-        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title5", "1.4", "555"))
+        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title1", 300))
+        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title2", 200))
+        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title3", 1000))
+        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title4", 10))
+        itemHotplace.add(HomeHotPlaceItem(R.drawable.sample_img_dog, "category", "title5", 0))
 
         val rvHotPlace = binding.rvHomeHotplace
         val hotPlaceAdapter = HomeHotPlaceListAdapter(itemHotplace)

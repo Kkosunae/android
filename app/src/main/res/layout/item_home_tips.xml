@@ -33,29 +33,35 @@
             app:layout_constraintTop_toBottomOf="@+id/item_home_tips_iv"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/item_home_tips_tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:layout_marginBottom="4dp"
+                android:textSize="14dp"
+                android:fontFamily="@font/nanum_eb"
                 android:text="TITLE"
                 />
             <TextView
                 android:id="@+id/item_home_tips_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:textSize="20dp"
+                android:fontFamily="@font/nanum_b"
+                android:textColor="@color/colorNightBlack"
                 android:text="TITLE"
                 />
             <TextView
                 android:id="@+id/item_home_tips_tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textSize="10dp"
+                android:textSize="11dp"
+                android:fontFamily="@font/nanum_b"
+                android:textColor="@color/colorBoulderGrey"
                 android:text="0"
                 />
         </androidx.appcompat.widget.LinearLayoutCompat>
