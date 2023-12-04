@@ -21,5 +21,7 @@
     <color name="colorNightBlack">#353535</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhiteSmoke">#F8F8F8</color>
-
+    <color name="colorBoulderGrey">#7D7D7D</color>
+    <color name="colorGoogleBlue">#4285F4</color>
+    <color name="colorMiddleGrey">#BBBBBB</color>
 </resources>

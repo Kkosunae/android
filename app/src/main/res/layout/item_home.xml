@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="백몽이"
-            android:textSize="11sp"
+            android:textSize="11dp"
             android:fontFamily="@font/nanum_r"
             app:layout_constraintStart_toEndOf="@id/item_iv_badge"
             app:layout_constraintTop_toTopOf="@id/item_iv_badge"/>

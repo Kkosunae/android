@@ -137,6 +137,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         pieChart.data = data
         //하단 설명 비활성화
         pieChart.legend.isEnabled = false
+        pieChart.holeRadius= 80f
         pieChart.isDrawHoleEnabled = true
         pieChart.description = null
         pieChart.setTouchEnabled(false)
@@ -156,6 +157,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
     private fun initObserver() {
         mainViewModel.homeMainBannerState.observe(viewLifecycleOwner, Observer { it ->
+            Log.d("HomeFragment", "homeMainBannerState observer it : $it")
             when (it) {
                 0 -> {
                     childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()

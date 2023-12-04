@@ -2,13 +2,9 @@ package com.kkosunae.view.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -107,7 +103,6 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4964860636, 127.028361548))
             .animate(CameraAnimation.Fly, 1000)
         naverMap.moveCamera(cameraUpdate)
-
 
         val marker = Marker()
         marker.position = LatLng(37.4964860636, 127.028361548)

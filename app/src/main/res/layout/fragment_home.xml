@@ -38,7 +38,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/home_walk_layout"
                 android:layout_width="0dp"
-                android:layout_height="136dp"
+                android:layout_height="122dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_main_cardview"
@@ -51,8 +51,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/home_walk_piechart"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/home_walk_piechart_layout"
                         android:layout_width="74dp"
                         android:layout_height="74dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -60,14 +60,32 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginStart="@dimen/home_walk_chart_margin_start"
                         android:layout_marginTop="@dimen/home_walk_chart_margin_top"
-                        android:layout_marginBottom="@dimen/home_walk_chart_margin_bottom"/>
-
-                    <TextView
-                        android:id="@+id/home_walk_myfoot_tv"
+                        android:layout_marginBottom="@dimen/home_walk_chart_margin_bottom">
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/home_walk_piechart"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/ic_home_chart_center"
+                        app:layout_constraintStart_toStartOf="@+id/home_walk_piechart_layout"
+                        app:layout_constraintTop_toTopOf="@+id/home_walk_piechart_layout"
+                        app:layout_constraintEnd_toEndOf="@+id/home_walk_piechart_layout"
+                        app:layout_constraintBottom_toBottomOf="@+id/home_walk_piechart_layout"/>
+                    <TextView
+                        android:id="@+id/home_walk_myfoot_tv"
+                        android:layout_width="wrap_content"qqq
+                        android:layout_height="wrap_content"
                         android:text="내 발자국"
-                        android:textSize="10sp"
+                        android:textSize="10dp"
+                        android:textColor="@color/colorNightBlack"
                         android:fontFamily="@font/nanum_r"
                         app:layout_constraintEnd_toStartOf="@+id/home_walk_line"
                         app:layout_constraintTop_toTopOf="parent"
@@ -79,11 +97,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="13"
-                        android:textSize="40sp"
+                        android:textSize="40dp"
                         android:fontFamily="@font/nanum_eb"
+                        android:textColor="@color/colorNightBlack"
                         app:layout_constraintEnd_toStartOf="@id/home_walk_ga"
-                        app:layout_constraintStart_toEndOf="@id/home_walk_piechart"
-                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart"
+                        app:layout_constraintStart_toEndOf="@id/home_walk_piechart_layout"
+                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart_layout"
                         app:layout_constraintBaseline_toBaselineOf="@id/home_walk_ga"
                         app:layout_constraintHorizontal_bias="0.6"/>
                     <TextView
@@ -91,9 +110,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="개"
-                        android:textSize="8sp"
+                        android:textSize="10dp"
+                        android:fontFamily="@font/nanum_r"
+                        android:textColor="@color/colorNightBlack"
                         app:layout_constraintEnd_toStartOf="@id/home_walk_line"
-                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart"
+                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart_layout"
                         android:layout_marginEnd="8dp"
                         />
                     <ImageView
@@ -110,7 +131,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="총 산책 거리"
-                        android:textSize="10sp"
+                        android:textSize="10dp"
+                        android:textColor="@color/colorNightBlack"
                         android:fontFamily="@font/nanum_r"
                         app:layout_constraintStart_toEndOf="@+id/home_walk_line"
                         app:layout_constraintTop_toTopOf="parent"
@@ -122,10 +144,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="54"
-                        android:textSize="40sp"
+                        android:textSize="40dp"
                         android:fontFamily="@font/nanum_eb"
+                        android:textColor="@color/colorNightBlack"
                         app:layout_constraintStart_toEndOf="@id/home_walk_line"
-                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart"
+                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart_layout"
                         android:layout_marginStart="8dp"
                         app:layout_constraintBaseline_toBaselineOf="@id/home_walk_km"/>
                     <TextView
@@ -133,10 +156,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="km"
-                        android:textSize="8sp"
+                        android:textSize="10dp"
+                        android:textColor="@color/colorNightBlack"
                         app:layout_constraintStart_toEndOf="@id/home_walk_distance_tv"
-                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart"
-                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="@id/home_walk_piechart_layout"
+                        android:layout_marginStart="9dp"
                         />
                     <ImageView
                         android:id="@+id/home_walk_next_iv"
@@ -219,7 +243,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="펫스 앤 팁스"
-                    android:textSize="15sp"/>
+                    android:textSize="15dp"/>
                 <TextView
                     android:id="@+id/tv_home_tips_all"
                     android:layout_width="wrap_content"
@@ -229,7 +253,7 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/tv_home_tips_title"
                     android:layout_marginEnd="4dp"
                     android:text="모두보기"
-                    android:textSize="10sp"/>
+                    android:textSize="10dp"/>
                 <ImageView
                     android:id="@+id/iv_home_tips_arrow"
                     android:layout_width="wrap_content"
@@ -258,7 +282,7 @@
                 android:layout_marginStart="@dimen/home_walk_layout_margin_start"
                 android:layout_marginEnd="@dimen/home_walk_layout_margin_end"
                 android:text="핫 발자국"
-                android:textSize="15sp"/>
+                android:textSize="15dp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv"
                 android:layout_width="0dp"

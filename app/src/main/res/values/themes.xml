@@ -21,14 +21,14 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.Kkosunae</item>
     </style>
-    <style name="BoldText40Black">
+    <style name="ExtraBoldText40Black">
         <item name="android:textSize">40dp</item>
         <item name="android:textColor">@color/colorNightBlack</item>
-        <item name="android:fontFamily">@font/nanum_b</item>
+        <item name="android:fontFamily">@font/nanum_eb</item>
     </style>
-    <style name="BoldText20Black">
+    <style name="ExtraBoldText20Black">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/colorNightBlack</item>
-        <item name="android:fontFamily">@font/nanum_b</item>
+        <item name="android:fontFamily">@font/nanum_eb</item>
     </style>
 </resources>

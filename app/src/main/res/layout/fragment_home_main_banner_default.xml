@@ -15,34 +15,42 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
+        android:gravity="end"
         android:text="집사야..\n좋은 말 할때 산책하자 ㅎㅎ"
-        android:textSize="10dp"/>
+        android:textSize="10dp"
+        android:fontFamily="@font/nanum_b"
+        android:textColor="@color/colorNightBlack"/>
     <TextView
         android:id="@+id/tv_home_main_co2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
         android:text="똑바로하개.."
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="12dp"
-        android:textSize="8sp"/>
+        android:textSize="7dp"
+        android:fontFamily="@font/nanum_b"
+        android:textColor="@color/colorBoulderGrey"/>
     <TextView
         android:id="@+id/tv_home_main_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="바로 시작하기"
-        android:textSize="20sp"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:text="바로 산책하기"
+        android:textSize="20dp"
+        android:fontFamily="@font/nanum_b"
+        android:textColor="@color/colorNightBlack"/>
     <ImageView
+        android:id="@+id/iv_home_main_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/tv_home_main_start"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:src="@drawable/icon_home_start_vector_small" />
 </androidx.constraintlayout.widget.ConstraintLayout>
