@@ -15,36 +15,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kkosunae"
         tools:targetApi="31">
+        <activity
+            android:name=".view.activity.NotificationActivity"
+            android:theme="@style/Theme.Kkosunae"
+            android:exported="false" />
 
         <meta-data
             android:name="com.naver.maps.map.m3lw8o5fjq"
             android:value="m3lw8o5fjq" />
+
         <activity
             android:name=".view.activity.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -53,7 +60,6 @@
                     android:scheme="kakaoae6bcf099a4885a217f4cd8a63548c5e" />
             </intent-filter>
         </activity>
-
         <activity android:name=".view.activity.LoginActivity" />
     </application>
 
