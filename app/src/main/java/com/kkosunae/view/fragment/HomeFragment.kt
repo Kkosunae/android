@@ -1,6 +1,7 @@
 package com.kkosunae.view.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ import com.kkosunae.viewmodel.MainViewModel
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.kkosunae.view.activity.NotificationActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
@@ -68,7 +70,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     //Todo 클릭 시 알람 내역 API 호출
                     // 확인한 알람, 미확인 알람 분리, 확인하지 않은 알람이 있다면 뱃지 표시
                     // 지금까지 받은 알람 표시하는 화면으로 이동 (R->L)
-                    R.id.home_menu_alam -> Log.d(TAG, "home_menu_alam click!")
+                    R.id.home_menu_alam -> {
+                        Log.d(TAG, "home_menu_alam click!")
+                        var intent = Intent(context, NotificationActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true
             }
