@@ -10,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.kkosunae.R
 import com.kkosunae.databinding.FragmentHomeMainBannerStartBinding
+import com.kkosunae.model.WalkEndData
+import com.kkosunae.network.WalkApiRepository
 import com.kkosunae.viewmodel.MainViewModel
 
 class HomeMainBannerFragmentStart : Fragment(), View.OnClickListener {
@@ -32,6 +34,7 @@ class HomeMainBannerFragmentStart : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.home_main_state_stop_button -> {
+//                WalkApiRepository.postWalkEnd(WalkEndData(1,11.1,22.2))
                 mainViewModel.setHomeMainBannerState(0)
             }
             R.id.home_main_state_pause_button -> {

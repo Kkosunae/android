@@ -103,7 +103,8 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         Log.d("MainActivity", "initBottomNavigation")
         binding.bnvMain.itemIconTintList = null
-        binding.bnvMain.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorWhite))
+        binding.bnvMain.backgroundTintList =resources.getColorStateList(R.color.colorWhite,theme)
+//            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorWhite))
         binding.bnvMain.setOnItemSelectedListener { item ->
             Log.d("MainActivity", "initBottomNavigation item : $item")
             when (item.itemId) {
