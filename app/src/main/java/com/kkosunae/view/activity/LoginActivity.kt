@@ -18,8 +18,12 @@ import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.kkosunae.GlobalApplication
 import com.kkosunae.R
 import com.kkosunae.databinding.ActivityLoginBinding
+import com.kkosunae.model.KakaoRequest
+import com.kkosunae.model.TokenItem
+import com.kkosunae.network.KakaoLoginApi.postKakaoLogin
 import com.kkosunae.viewmodel.MainViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -79,6 +83,21 @@ class LoginActivity : AppCompatActivity() {
             } else if (token != null) {
                 Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("loginActivity" ,"token :" + token.toString() + ", token : " + token)
+                val newToken = TokenItem(token.accessToken, token.refreshToken)
+                mainViewModel.setCurrentToken(newToken)
+                GlobalApplication.prefs.setString("accessToken", newToken.accessToken)
+                GlobalApplication.prefs.setString("refreshToken", newToken.refreshToken)
+                UserApiClient.instance.me { user, meerror ->
+                    if (meerror != null) {
+                        Log.d("loginActivity" , "meerror : " +meerror.toString())
+                    } else {
+                        val userId = user?.id
+                        val userEmail = user?.kakaoAccount?.email
+                        val userName = user?.kakaoAccount?.name
+                        Log.d("loginActivity" , "id : " +userId + "userEmail : " +userEmail + "userName : " +userName)
+                        postKakaoLogin(KakaoRequest(userId.toString(),userName.toString(),userEmail.toString()))
+                    }
+                }
                 val intent = Intent(this, MainActivity::class.java)
                 mainViewModel.setIsLogin(true)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))

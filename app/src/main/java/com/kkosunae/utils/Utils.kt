@@ -1,4 +1,4 @@
-package com.kkosunae
+package com.kkosunae.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
