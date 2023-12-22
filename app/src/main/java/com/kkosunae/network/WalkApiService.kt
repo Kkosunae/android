@@ -2,6 +2,7 @@ package com.kkosunae.network
 
 import com.kkosunae.model.KakaoRequest
 import com.kkosunae.model.KakaoResponse
+import com.kkosunae.model.SignUpInfo
 import com.kkosunae.model.WalkEndData
 import com.kkosunae.model.WalkStartData
 
@@ -21,5 +22,6 @@ interface WalkApiService {
 interface LoginApiService {
     @POST("user/kakaoLogin")
     fun postKakaoLogin(@Body request: KakaoRequest): Call<KakaoResponse>
-
+    @POST("user")
+    fun postSingUp(@Body request: SignUpInfo): Call<KakaoResponse>
 }

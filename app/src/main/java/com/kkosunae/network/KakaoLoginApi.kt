@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import com.kkosunae.GlobalApplication
 import com.kkosunae.model.KakaoRequest
 import com.kkosunae.model.KakaoResponse
+import com.kkosunae.model.SignUpInfo
 import com.kkosunae.model.WalkEndData
 import com.kkosunae.model.WalkStartData
 import okhttp3.Interceptor
@@ -47,7 +48,7 @@ object KakaoLoginApi {
             }
             return chain.proceed(builder.build())
         }
-}
+    }
     fun postKakaoLogin(kakaoRequest: KakaoRequest) {
         retrofitLogin().postKakaoLogin(kakaoRequest)
             .enqueue(object :Callback<KakaoResponse> {
@@ -61,8 +62,9 @@ object KakaoLoginApi {
                         Log.d(TAG, "header : " +response.headers().toString())
                         Log.d(TAG, "body : " + response.body().toString())
                         if (response.body()?.type.equals("register")) {
-                           //회원가입
+                           signUp(SignUpInfo(response.body()?.socialLoginId.toString(), "name", "19970527", "male" ))
                         } else {
+                            GlobalApplication.prefs.setString("jwt",response.body()?.jwt.toString())
                             //jwt 저장.
                         }
 
@@ -71,6 +73,29 @@ object KakaoLoginApi {
 
                 override fun onFailure(call: Call<KakaoResponse>, t: Throwable) {
                     Log.d(TAG, "onFailure : $t")
+                }
+
+            })
+    }
+    fun signUp(signUpInfo: SignUpInfo) {
+        retrofitLogin().postSingUp(signUpInfo)
+            .enqueue(object :Callback<KakaoResponse> {
+                override fun onResponse(
+                    call: Call<KakaoResponse>,
+                    response: Response<KakaoResponse>
+                ) {
+                    if (response.isSuccessful.not()) {
+                        Log.d(TAG, "onResponse : " + response.message())
+                    } else {
+                        Log.d(TAG, "header : " +response.headers().toString())
+                        Log.d(TAG, "body : " + response.body().toString())
+                        GlobalApplication.prefs.setString("jwt",response.body()?.jwt.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<KakaoResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure : $t")
+
                 }
 
             })

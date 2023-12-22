@@ -25,6 +25,7 @@ import com.kkosunae.model.KakaoRequest
 import com.kkosunae.model.TokenItem
 import com.kkosunae.network.KakaoLoginApi.postKakaoLogin
 import com.kkosunae.viewmodel.MainViewModel
+import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -87,15 +88,18 @@ class LoginActivity : AppCompatActivity() {
                 mainViewModel.setCurrentToken(newToken)
                 GlobalApplication.prefs.setString("accessToken", newToken.accessToken)
                 GlobalApplication.prefs.setString("refreshToken", newToken.refreshToken)
+
                 UserApiClient.instance.me { user, meerror ->
                     if (meerror != null) {
                         Log.d("loginActivity" , "meerror : " +meerror.toString())
                     } else {
-                        val userId = user?.id
-                        val userEmail = user?.kakaoAccount?.email
-                        val userName = user?.kakaoAccount?.name
-                        Log.d("loginActivity" , "id : " +userId + "userEmail : " +userEmail + "userName : " +userName)
-                        postKakaoLogin(KakaoRequest(userId.toString(),userName.toString(),userEmail.toString()))
+                        runBlocking {
+                            val userId = user?.id
+                            val userEmail = user?.kakaoAccount?.email
+                            val userName = user?.kakaoAccount?.name
+                            Log.d("loginActivity" , "id : " +userId + "userEmail : " +userEmail + "userName : " +userName)
+                            postKakaoLogin(KakaoRequest(userId.toString(),userName.toString(),userEmail.toString()))
+                        }
                     }
                 }
                 val intent = Intent(this, MainActivity::class.java)

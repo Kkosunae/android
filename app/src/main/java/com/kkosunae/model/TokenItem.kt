@@ -18,4 +18,10 @@ data class KakaoResponse (
     @SerializedName("socialLoginId") val socialLoginId : String
 
 )
+data class SignUpInfo (
+    @SerializedName("socialLoginId") val socialLoginId : String,
+    @SerializedName("name") val name : String,
+    @SerializedName("birthday") val birthday : String,
+    @SerializedName("gender") val gender : String,
+)
 

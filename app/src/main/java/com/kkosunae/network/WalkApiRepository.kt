@@ -48,7 +48,7 @@ object WalkApiRepository {
     class AppInterceptor: Interceptor {
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
             val builder = chain.request().newBuilder()
-            val jwtToken: String? = GlobalApplication.prefs.getString("accessToken", "null")
+            val jwtToken: String? = GlobalApplication.prefs.getString("jwt", "null")
             if (jwtToken != null) {
                 builder.addHeader("authorization", jwtToken)
             }
