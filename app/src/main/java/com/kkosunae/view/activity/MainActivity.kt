@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObserver() {
         mainViewModel.currentTab.observe(this, Observer {it ->
             Log.d("MainActivity", "observe it : $it")
+            binding.mainLayout.setPadding(0, getStatusBarHeight(this), 0, 0)
             when (it) {
                 1 -> {
                     binding.mainToolbar.title = ""
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                     binding.mainToolbar.setTitle(R.string.toolbar_menu_map)
                     supportActionBar?.hide()
                     visibleToolbarIcon(false)
+                    binding.mainLayout.setPadding(0, 0, 0, 0)
                     Log.d("MainActivity", "clear()")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container_main, MyMapFragment() ).commit()
 
