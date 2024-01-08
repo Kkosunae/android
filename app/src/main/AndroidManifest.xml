@@ -22,8 +22,8 @@
             android:exported="false" />
 
         <meta-data
-            android:name="com.naver.maps.map.m3lw8o5fjq"
-            android:value="m3lw8o5fjq" />
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="@string/naver_map_client_id" />
 
         <activity
             android:name=".view.activity.SplashActivity"

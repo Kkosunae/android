@@ -15,7 +15,7 @@ class GlobalApplication : Application() {
         super.onCreate()
         prefs = PreferenceUtil(applicationContext)
         NaverMapSdk.getInstance(this).client =
-                NaverMapSdk.NaverCloudPlatformClient("m3lw8o5fjq")
+                NaverMapSdk.NaverCloudPlatformClient(getString(R.string.naver_map_client_id))
         var keyHash = Utility.getKeyHash(this)
         Log.i("GlobalApplication", "$keyHash")
         // kakao sdk init
