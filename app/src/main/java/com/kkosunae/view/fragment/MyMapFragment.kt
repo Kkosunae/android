@@ -18,10 +18,13 @@ import com.kkosunae.model.HomeItem
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.FusedLocationSource
 
 class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
     val TAG : String = "MyMapFragment"
     lateinit var binding: FragmentMapBinding
+    private lateinit var mNaverMap: NaverMap
+    private lateinit var mLocationSource: FusedLocationSource
     private var isFabOpen = false
     private lateinit var bottomSheetLayout : LinearLayout
     private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayout>
@@ -33,6 +36,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         Log.e(TAG,"onCreateView()")
         binding = FragmentMapBinding.inflate(inflater)
         initBottomSheet()
+        mLocationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         val menuHost: MenuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -67,6 +71,37 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         }
         initRecyclerView()
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (mLocationSource.onRequestPermissionsResult(requestCode,permissions, grantResults)) {
+            if (!mLocationSource.isActivated) {
+                mNaverMap.locationTrackingMode = LocationTrackingMode.Follow
+            }
+            return
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+    override fun onMapReady(naverMap: NaverMap) {
+        Log.e(TAG,"onMapReady()")
+//        MapFragment.newInstance(options)
+        mNaverMap = naverMap
+        val uiSettings = mNaverMap.uiSettings
+        val locationOverlay = mNaverMap.locationOverlay
+        mNaverMap.locationSource = mLocationSource
+        uiSettings.isLocationButtonEnabled = true
+        locationOverlay.isVisible = true
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4964860636, 127.028361548))
+            .animate(CameraAnimation.Fly, 1000)
+        mNaverMap.moveCamera(cameraUpdate)
+
+        val marker = Marker()
+        marker.position = LatLng(37.4964860636, 127.028361548)
+        marker.map = mNaverMap
+    }
     private fun initRecyclerView() {
         var itemList = ArrayList<HomeItem>()
         itemList.add(HomeItem("chlghduf", "sodyd"))
@@ -97,17 +132,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
 
     }
 
-    override fun onMapReady(naverMap: NaverMap) {
-        Log.e(TAG,"onMapReady()")
-//        MapFragment.newInstance(options)
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4964860636, 127.028361548))
-            .animate(CameraAnimation.Fly, 1000)
-        naverMap.moveCamera(cameraUpdate)
 
-        val marker = Marker()
-        marker.position = LatLng(37.4964860636, 127.028361548)
-        marker.map = naverMap
-    }
     private fun initBottomSheet() {
         bottomSheetLayout = binding.bottomSheet.root
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
@@ -118,5 +143,8 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         when (v?.id) {
 
         }
+    }
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }
