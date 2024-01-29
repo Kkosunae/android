@@ -19,11 +19,28 @@
             app:navermap_zoom="16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.naver.maps.map.widget.LogoView
+            android:id="@+id/navermap_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <com.naver.maps.map.widget.LocationButtonView
+            android:id="@+id/navermap_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <include
         android:id="@+id/bottom_sheet"
         layout="@layout/bottom_sheet" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/map_button_foot"

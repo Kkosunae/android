@@ -69,7 +69,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
             }
         mapFragment.getMapAsync(this)
         binding.mapButtonFoot.setOnClickListener {
-            Log.d(TAG, "home_menu_alam click!")
+            Log.d(TAG, "map_foot button click!")
             var intent = Intent(context, WriteActivity::class.java)
             startActivity(intent)
         }
@@ -100,7 +100,18 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         val uiSettings = mNaverMap.uiSettings
         val locationOverlay = mNaverMap.locationOverlay
         mNaverMap.locationSource = mLocationSource
-        uiSettings.isLocationButtonEnabled = true
+
+        uiSettings.isLocationButtonEnabled = false
+        uiSettings.isCompassEnabled = false
+        uiSettings.isScaleBarEnabled = false
+        uiSettings.isZoomControlEnabled = false
+        uiSettings.isLocationButtonEnabled = false
+        val logo = binding.navermapLogo
+        logo.setMap(naverMap)
+        logo.isClickable = false
+        val location = binding.navermapLocationButton
+        location.map = naverMap
+
         locationOverlay.isVisible = true
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4964860636, 127.028361548))
             .animate(CameraAnimation.Fly, 1000)
@@ -142,9 +153,9 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
 
 
     private fun initBottomSheet() {
-        bottomSheetLayout = binding.bottomSheet.root
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
+//        bottomSheetLayout = binding.bottomSheet.root
+//        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+//        Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
     }
 
     override fun onClick(v: View?) {
