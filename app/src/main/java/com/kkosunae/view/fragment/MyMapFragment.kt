@@ -1,6 +1,7 @@
 package com.kkosunae.view.fragment
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,6 +16,8 @@ import com.kkosunae.R
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.databinding.FragmentMapBinding
 import com.kkosunae.model.HomeItem
+import com.kkosunae.view.activity.NotificationActivity
+import com.kkosunae.view.activity.WriteActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -65,10 +68,15 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
                 fm.beginTransaction().add(R.id.fragment_container_map, it).commit()
             }
         mapFragment.getMapAsync(this)
-
-        binding.mapFabFilter.setOnClickListener{
-            toggleFab()
+        binding.mapButtonFoot.setOnClickListener {
+            Log.d(TAG, "home_menu_alam click!")
+            var intent = Intent(context, WriteActivity::class.java)
+            startActivity(intent)
         }
+//         toggleFab 기능 삭제
+//        binding.mapFabFilter.setOnClickListener{
+//            toggleFab()
+//        }
         initRecyclerView()
     }
 
@@ -115,22 +123,22 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
     }
-
-    private fun toggleFab() {
-        // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
-        if (isFabOpen) {
-            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 45f, 0f).apply { start() }
-        } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
-            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 440f).apply { start() }
-            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 220f).apply { start() }
-            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 0f, 45f).apply { start() }
-        }
-
-        isFabOpen = !isFabOpen
-
-    }
+//      기능 삭제
+//    private fun toggleFab() {
+//        // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
+//        if (isFabOpen) {
+//            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 0f).apply { start() }
+//            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 0f).apply { start() }
+//            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 45f, 0f).apply { start() }
+//        } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
+//            ObjectAnimator.ofFloat(binding.mapFabFilter3, "translationY", 440f).apply { start() }
+//            ObjectAnimator.ofFloat(binding.mapFabFilter2, "translationY", 220f).apply { start() }
+//            ObjectAnimator.ofFloat(binding.mapFabFilter, View.ROTATION, 0f, 45f).apply { start() }
+//        }
+//
+//        isFabOpen = !isFabOpen
+//
+//    }
 
 
     private fun initBottomSheet() {

@@ -19,56 +19,21 @@
             app:navermap_zoom="16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/map_fab_filter2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/map_fab_filter3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/map_fab_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            />
-        <Button
-            android:id="@+id/map_button_walk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/map_button_2"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="산책 버튼"
-            />
-        <Button
-            android:id="@+id/map_button_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="발자국"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@+id/bottom_sheet"
         layout="@layout/bottom_sheet" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/map_button_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_btn_foot"
+        android:tint="@android:color/transparent"
+        app:useCompatPadding="true"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
