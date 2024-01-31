@@ -4,18 +4,49 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
-        android:id="@+id/iv_kakao_login_activity"
-        android:layout_width="match_parent"
+        android:id="@+id/iv_main_logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/kakao_login_medium_narrow"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_kakao_login_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_kakao_login"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_main_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_google_login_activity"/>
     <ImageView
         android:id="@+id/iv_google_login_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_google_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_kakao_login_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_temp_login_activity"/>
+    <ImageView
+        android:id="@+id/iv_temp_login_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_google_login"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_google_login_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/google_signin_neutral_sq_1x"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_kakao_login_activity"/>
-
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
