@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -97,6 +98,20 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         Log.e(TAG,"onMapReady()")
 //        MapFragment.newInstance(options)
         mNaverMap = naverMap
+        naverMap.setOnMapClickListener { point, coord ->
+            if (binding.mapSearch.visibility == View.VISIBLE) {
+                binding.mapSearch.visibility = View.INVISIBLE
+                binding.btnFilter.visibility = View.INVISIBLE
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            }
+            else {
+                binding.mapSearch.visibility = View.VISIBLE
+                binding.btnFilter.visibility = View.VISIBLE
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
+        }
+
         val uiSettings = mNaverMap.uiSettings
         val locationOverlay = mNaverMap.locationOverlay
         mNaverMap.locationSource = mLocationSource
@@ -153,9 +168,9 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
 
 
     private fun initBottomSheet() {
-//        bottomSheetLayout = binding.bottomSheet.root
-//        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-//        Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
+        bottomSheetLayout = binding.bottomSheet.root
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
     }
 
     override fun onClick(v: View?) {
@@ -166,4 +181,5 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
+
 }

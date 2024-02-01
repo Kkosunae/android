@@ -19,20 +19,45 @@
             app:navermap_zoom="16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/map_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            app:iconifiedByDefault="false"
+            app:queryHint="강남역"
+            android:background="@drawable/bg_stroke_round_white"
+            app:layout_goneMarginStart="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_filter"/>
+        <ImageButton
+            android:id="@+id/btn_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_filter"
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintStart_toEndOf="@id/map_search"
+            app:layout_constraintTop_toTopOf="@id/map_search"
+            app:layout_constraintEnd_toEndOf="parent"/>
         <com.naver.maps.map.widget.LogoView
             android:id="@+id/navermap_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
         <com.naver.maps.map.widget.LocationButtonView
             android:id="@+id/navermap_location_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
