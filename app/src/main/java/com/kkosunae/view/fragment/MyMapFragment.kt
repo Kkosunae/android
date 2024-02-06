@@ -1,6 +1,9 @@
 package com.kkosunae.view.fragment
 
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +20,7 @@ import com.kkosunae.R
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.databinding.FragmentMapBinding
 import com.kkosunae.model.HomeItem
+import com.kkosunae.view.activity.MainActivity
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WriteActivity
 import com.naver.maps.geometry.LatLng
@@ -170,6 +174,38 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
     private fun initBottomSheet() {
         bottomSheetLayout = binding.bottomSheet.root
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        bottomSheetBehavior.isGestureInsetBottomIgnored = true
+        bottomSheetBehavior.isDraggable = true
+        bottomSheetBehavior.maxHeight = resources.getDimensionPixelSize(R.dimen.expanded_height)
+        bottomSheetBehavior.peekHeight = resources.getDimensionPixelSize(R.dimen.collapsed_height)
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+
+                    }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                Log.d("onSlide","slideOffset : "+ slideOffset)
+//                if (slideOffset <= 0.5 && slideOffset > 0.1 ) {
+//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+//                } else if (slideOffset < 0.1) {
+//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+//                } else
+//                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        })
         Log.d("peekHeight","peekHeight : "+ bottomSheetBehavior.peekHeight.toString())
     }
 
