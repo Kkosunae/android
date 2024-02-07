@@ -1,10 +1,6 @@
 package com.kkosunae.network
 
-import com.kkosunae.model.KakaoRequest
-import com.kkosunae.model.KakaoResponse
-import com.kkosunae.model.SignUpInfo
-import com.kkosunae.model.WalkEndData
-import com.kkosunae.model.WalkStartData
+import com.kkosunae.model.*
 
 import retrofit2.Call
 import retrofit2.http.Body

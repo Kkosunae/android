@@ -73,6 +73,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
                 fm.beginTransaction().add(R.id.fragment_container_map, it).commit()
             }
         mapFragment.getMapAsync(this)
+
         binding.mapButtonFoot.setOnClickListener {
             Log.d(TAG, "map_foot button click!")
             var intent = Intent(context, WriteActivity::class.java)

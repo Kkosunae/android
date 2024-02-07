@@ -47,7 +47,7 @@ class SplashActivity : AppCompatActivity() {
                 duration = 1000L
                 doOnEnd {
                     splashScreenView.remove()
-                    mainViewModel.setIsLogin(true)
+                    mainViewModel.setIsLogin(false)
                 }
                 start()
             }

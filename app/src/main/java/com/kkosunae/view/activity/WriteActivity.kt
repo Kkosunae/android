@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kkosunae.R
 import com.kkosunae.adapter.HomeNotiListAdapter
 import com.kkosunae.databinding.ActivityWriteBinding
+import com.kkosunae.model.FootData
 import com.kkosunae.model.HomeNotiItem
+import com.kkosunae.network.RetrofitManager
 
 class WriteActivity : AppCompatActivity() {
     lateinit var binding: ActivityWriteBinding
@@ -32,6 +34,7 @@ class WriteActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.map_write_menu_confirm-> {
                 Log.d(TAG, "click confirm")
+                RetrofitManager.instance.postFootPrint(FootData("contentasldfkjsdklfjasdklf", 11.22, 12.22, "image"))
             }
         }
         return super.onOptionsItemSelected(item)
