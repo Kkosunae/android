@@ -1,5 +1,7 @@
 package com.kkosunae.view.activity
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +14,7 @@ import com.kkosunae.databinding.ActivityWriteBinding
 import com.kkosunae.model.FootData
 import com.kkosunae.model.HomeNotiItem
 import com.kkosunae.network.RetrofitManager
+import com.kkosunae.view.fragment.MyMapFragment
 
 class WriteActivity : AppCompatActivity() {
     lateinit var binding: ActivityWriteBinding
@@ -34,7 +37,12 @@ class WriteActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.map_write_menu_confirm-> {
                 Log.d(TAG, "click confirm")
-                RetrofitManager.instance.postFootPrint(FootData("contentasldfkjsdklfjasdklf", 11.22, 12.22, "image"))
+                val content : String = binding.editText.text.toString()
+                val intent = Intent()
+                intent.putExtra("resultKey", content)
+                setResult(Activity.RESULT_OK, intent)
+                Log.d(TAG, "setResult$intent")
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)

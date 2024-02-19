@@ -1,5 +1,6 @@
 package com.kkosunae.network
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kkosunae.GlobalApplication
@@ -44,6 +45,7 @@ object RetrofitClient {
             val builder = chain.request().newBuilder()
             val jwtToken: String? = GlobalApplication.prefs.getString("accessToken", "null")
             if (jwtToken != null) {
+                Log.d("RetrofitClient","prefs_acessToken : $jwtToken")
                 builder.addHeader("authorization", jwtToken)
             }
             return chain.proceed(builder.build())

@@ -5,11 +5,13 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -19,7 +21,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kkosunae.R
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.databinding.FragmentMapBinding
+import com.kkosunae.model.FootData
 import com.kkosunae.model.HomeItem
+import com.kkosunae.network.RetrofitManager
 import com.kkosunae.view.activity.MainActivity
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WriteActivity
@@ -27,8 +31,38 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import java.io.File
+import java.io.FileInputStream
 
-class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
+class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, NaverMap.OnLocationChangeListener{
+    override fun onLocationChange(p0: Location) {
+        p0.latitude
+        p0.longitude
+        //발자국 조회 api 호출.
+    }
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val resultData = data?.getStringExtra("resultKey")
+            // 받아온 데이터 처리
+            Log.d(TAG, "$resultData")
+            val file = File("/Users/dd/development/Kkosunae/app/src/main/res/drawable/sample_img_dog.png")
+            // 발자국 생성 api호출.
+            runBlocking {
+                val result = async {
+                    RetrofitManager.instance.postFootPrint(FootData(resultData, 11.22, 12.22, file))
+                }
+                result.await()
+            }
+
+        }
+    }
+    private fun startWriteActivity() {
+        val intent = Intent(activity, WriteActivity::class.java)
+        launcher.launch(intent)
+    }
     val TAG : String = "MyMapFragment"
     lateinit var binding: FragmentMapBinding
     private lateinit var mNaverMap: NaverMap
@@ -76,8 +110,9 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
 
         binding.mapButtonFoot.setOnClickListener {
             Log.d(TAG, "map_foot button click!")
-            var intent = Intent(context, WriteActivity::class.java)
-            startActivity(intent)
+            startWriteActivity()
+//            var intent = Intent(context, WriteActivity::class.java)
+//            startActivity(intent)
         }
 //         toggleFab 기능 삭제
 //        binding.mapFabFilter.setOnClickListener{
@@ -141,6 +176,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener{
         marker.position = LatLng(37.4964860636, 127.028361548)
         marker.map = mNaverMap
     }
+
     private fun initRecyclerView() {
         var itemList = ArrayList<HomeItem>()
         itemList.add(HomeItem("chlghduf", "sodyd"))

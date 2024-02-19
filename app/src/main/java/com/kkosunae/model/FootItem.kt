@@ -2,13 +2,14 @@ package com.kkosunae.model
 
 import android.media.Image
 import com.google.gson.annotations.SerializedName
+import java.io.File
 import java.net.URL
 
 data class FootData(
-    @SerializedName("content") val content : String,
+    @SerializedName("content") val content : String?,
     @SerializedName("latitude") val latitude : Double,
     @SerializedName("longitude") val longitude : Double,
-    @SerializedName("image") val image : String ,
+    @SerializedName("image") val image : File ,
 )
 data class FootDataResponse(
     @SerializedName("message") val message : String,
