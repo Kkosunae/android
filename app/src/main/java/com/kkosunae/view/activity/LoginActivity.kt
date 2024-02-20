@@ -21,9 +21,11 @@ import com.kakao.sdk.user.UserApiClient
 import com.kkosunae.GlobalApplication
 import com.kkosunae.R
 import com.kkosunae.databinding.ActivityLoginBinding
+import com.kkosunae.model.GoogleRequest
 import com.kkosunae.model.KakaoRequest
 import com.kkosunae.model.TokenItem
 import com.kkosunae.network.KakaoLoginApi.postKakaoLogin
+import com.kkosunae.network.RetrofitManager
 import com.kkosunae.viewmodel.MainViewModel
 import kotlinx.coroutines.runBlocking
 
@@ -124,23 +126,33 @@ class LoginActivity : AppCompatActivity() {
             googleSignResultLauncher.launch(signIntent)
 
         }
+        binding.ivTempLoginActivity.isEnabled = false
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            val email = account?.email.toString()
-            var googletoken = account?.idToken.toString()
-            var googletokenAuth = account?.serverAuthCode.toString()
+            val userEmail = account?.email.toString()
+            val userName = account?.givenName.toString()
+            val userId = account?.id.toString()
 
-            Log.e("Google account",email)
-            Log.e("Google account",googletoken)
-            Log.e("Google account", googletokenAuth)
-            // TODO: 로그인 정보 회원인지 확인하는 작업 필요.
-            val intent = Intent(this, MainActivity::class.java)
-            mainViewModel.setIsLogin(true)
-            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-            finish()
+            var isGoogleApi = false
+
+            Log.d("loginActivity" ,
+                "id : $userId, userEmail : $userEmail, userName : $userName"
+            )
+            isGoogleApi = RetrofitManager.instance.postGoogleLogin(GoogleRequest(userId,userName,userEmail))
+
+            if (isGoogleApi) {
+                val intent = Intent(this, MainActivity::class.java)
+                mainViewModel.setIsLogin(true)
+                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                finish()
+            } else {
+                Log.d("loginActivity", "googleApi Fail!!!")
+            }
+
+
         } catch (e: ApiException){
             Log.e("Google account","signInResult:failed Code = " + e.statusCode)
         }
