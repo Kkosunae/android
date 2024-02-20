@@ -21,38 +21,42 @@ import kotlin.concurrent.thread
 
 class SplashActivity : AppCompatActivity() {
 
-    private lateinit var splashScreen: SplashScreen
+//    private lateinit var splashScreen: SplashScreen
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        splashScreen = installSplashScreen()
+//        splashScreen = installSplashScreen()
 
-        startSplash()
+//        startSplash()
 
         setContentView(R.layout.activity_splash)
         initObserver()
-
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        },2000)
 
     }
 
-    private fun startSplash() {
-
-        splashScreen.setOnExitAnimationListener { splashScreenView ->
-            val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 5f, 1f)
-            val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 5f, 1f)
-
-            ObjectAnimator.ofPropertyValuesHolder(splashScreenView.iconView, scaleX, scaleY).run {
-                interpolator = AnticipateInterpolator()
-                duration = 1000L
-                doOnEnd {
-                    splashScreenView.remove()
-                    mainViewModel.setIsLogin(false)
-                }
-                start()
-            }
-        }
-    }
+//    private fun startSplash() {
+//
+//        splashScreen.setOnExitAnimationListener { splashScreenView ->
+//            val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 5f, 1f)
+//            val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 5f, 1f)
+//
+//            ObjectAnimator.ofPropertyValuesHolder(splashScreenView.iconView, scaleX, scaleY).run {
+//                interpolator = AnticipateInterpolator()
+//                duration = 1000L
+//                doOnEnd {
+//                    splashScreenView.remove()
+//                    mainViewModel.setIsLogin(false)
+//                }
+//                start()
+//            }
+//        }
+//    }
 
     private fun initObserver() {
         mainViewModel.isLogin.observe(this, Observer { it ->
