@@ -1,6 +1,5 @@
 package com.kkosunae.view.activity
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import com.kkosunae.R
 import com.kkosunae.adapter.HomeNotiListAdapter
 import com.kkosunae.databinding.ActivityNotificationBinding
 import com.kkosunae.model.HomeNotiItem
-import java.util.Date
 
 class NotificationActivity : AppCompatActivity() {
     lateinit var binding: ActivityNotificationBinding

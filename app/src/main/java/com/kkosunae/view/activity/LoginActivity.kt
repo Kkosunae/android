@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else if (token != null) {
-                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("loginActivity" ,"token :" + token.toString() + ", token : " + token)
                 val newToken = TokenItem(token.accessToken, token.refreshToken)
                 mainViewModel.setCurrentToken(newToken)

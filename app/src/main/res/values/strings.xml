@@ -16,5 +16,6 @@
     <string name="toolbar_menu_mypage">마이페이지</string>
     <string name="toolbar_menu_notification">알림</string>
     <string name="toolbar_menu_write">발도장 찍기</string>
+    <string name="toolbar_menu_walk_statistic">산책 통계</string>
 
 </resources>

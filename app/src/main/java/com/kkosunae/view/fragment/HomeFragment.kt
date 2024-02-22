@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.kkosunae.view.activity.NotificationActivity
+import com.kkosunae.view.activity.WalkStatisticActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
@@ -52,6 +53,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        binding.homeWalkNextIv.setOnClickListener(this)
     }
 
     override fun onAttach(context: Context) {
@@ -158,6 +160,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
             R.id.home_walk_distance_tv -> {
                 mainViewModel.downFootCount()
+            }
+            R.id.home_walk_next_iv -> {
+                var intent = Intent(context, WalkStatisticActivity::class.java)
+                startActivity(intent)
             }
         }
     }

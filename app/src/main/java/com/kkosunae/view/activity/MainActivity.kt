@@ -121,10 +121,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun visibleToolbarIcon(boolean: Boolean) {
         if (boolean) {
-            binding.mainToolbarLogo1.visibility = View.VISIBLE
             binding.mainToolbarLogo2.visibility = View.VISIBLE
         } else {
-            binding.mainToolbarLogo1.visibility = View.GONE
             binding.mainToolbarLogo2.visibility = View.GONE
         }
 
