@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 val intent = Intent(this, MainActivity::class.java)
                 mainViewModel.setIsLogin(true)
+                Log.d("loginActivity" , "Start MainActivity!!")
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                 finish()
             }

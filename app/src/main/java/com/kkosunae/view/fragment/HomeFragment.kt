@@ -26,6 +26,7 @@ import com.kkosunae.viewmodel.MainViewModel
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.kkosunae.network.WalkApiRepository.getWalkStatistics
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WalkStatisticActivity
 
@@ -35,24 +36,26 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private val TAG = "HomeFragment"
     private val mainViewModel : MainViewModel by activityViewModels()
     private var mFootCount : Int = 0
+    private var mWalkID = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG,"onCreateView")
         binding = FragmentHomeBinding.inflate(inflater)
         initObserver()
         // menu item 설정
         initMenuItem()
         // pirchart
         initPieChart()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        getWalkStatistics()
         binding.homeWalkNextIv.setOnClickListener(this)
     }
 

@@ -4,10 +4,8 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kkosunae.GlobalApplication
-import com.kkosunae.model.KakaoRequest
-import com.kkosunae.model.KakaoResponse
-import com.kkosunae.model.WalkEndData
-import com.kkosunae.model.WalkStartData
+import com.kkosunae.model.*
+import com.kkosunae.viewmodel.MainViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -75,20 +73,28 @@ object WalkApiRepository {
 
 
 }
-    fun postWalkStart(walkStartData: WalkStartData) {
+    fun postWalkStart(walkStartData: WalkStartData, mainViewModel: MainViewModel) {
         retrofit().postWalkStart(walkStartData)
-            .enqueue(object :Callback<Void> {
+            .enqueue(object :Callback<WalkStartResponse> {
                 override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>) {
+                    call: Call<WalkStartResponse>,
+                    response: Response<WalkStartResponse>) {
                     if (response.isSuccessful.not()) {
                         Log.d(TAG, "onResponse : " + response.message())
                     } else {
-                        Log.d(TAG, response.headers().toString())
+                        Log.d(TAG, "Success response")
+                        Log.d(TAG, response.body().toString())
+                        Log.d(TAG, response.body()?.message.toString())
+                        Log.d(TAG, response.body()?.walkId.toString())
+
+                        if(response.code() == 200) {
+                            mainViewModel.upFootCount()
+                            mainViewModel.setWalkId(response.body()?.walkId)
+                        }
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<WalkStartResponse>, t: Throwable) {
                     Log.d(TAG, "onFailure : $t")
                 }
 
@@ -103,6 +109,7 @@ object WalkApiRepository {
                         Log.d(TAG, "onResponse : " + response.message())
                     } else {
                         Log.d(TAG, response.headers().toString())
+
                     }
                 }
 
@@ -110,6 +117,23 @@ object WalkApiRepository {
                     Log.d(TAG, "onFailure : $t")
                 }
 
+            })
+    }
+    fun getWalkStatistics() {
+        retrofit().getWalkStatistics()
+            .enqueue(object :Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful.not()) {
+                        Log.d(TAG, "onResponse : " + response.message())
+                    } else {
+                        Log.d(TAG, response.headers().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.d(TAG, "onFailure : $t")
+
+                }
             })
     }
 }

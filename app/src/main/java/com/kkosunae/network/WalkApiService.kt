@@ -10,10 +10,13 @@ import retrofit2.http.POST
 
 interface WalkApiService {
     @POST("walk/start")
-    fun postWalkStart(@Body request: WalkStartData): Call<Void>
+    fun postWalkStart(@Body request: WalkStartData): Call<WalkStartResponse>
 
     @POST("walk/end")
     fun postWalkEnd(@Body request: WalkEndData): Call<Void>
+
+    @GET("walk/statistics")
+    fun getWalkStatistics(): Call<Void>
 }
 interface LoginApiService {
     @POST("user/kakaoLogin")

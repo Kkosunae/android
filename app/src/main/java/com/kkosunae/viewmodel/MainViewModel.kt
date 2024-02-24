@@ -13,7 +13,7 @@ class MainViewModel : ViewModel(){
     private val _homeMainBannerState = MutableLiveData<Int>()
     private val _footCount = MutableLiveData<Int>()
     private val _currentToken = MutableLiveData<TokenItem>()
-
+    private var mWalkId =0
     val currentTab : LiveData<Int>
         get() = _currentTab
     val isLogin : LiveData<Boolean>
@@ -39,6 +39,16 @@ class MainViewModel : ViewModel(){
     }
     fun setHomeMainBannerState(index : Int) {
         _homeMainBannerState.postValue(index)
+    }
+    fun setFootCount(value : Int) {
+        _footCount.value = value
+    }
+    fun setWalkId(value :Int?) {
+        if (value != null)
+            mWalkId = value
+    }
+    fun getWalkId() : Int {
+        return mWalkId
     }
     fun upFootCount() {
         Log.d("MainViewModel", "upFootCount : " + _footCount.value)

@@ -2,7 +2,6 @@ package com.kkosunae.view.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.kkosunae.R
 import com.kakao.sdk.user.UserApiClient

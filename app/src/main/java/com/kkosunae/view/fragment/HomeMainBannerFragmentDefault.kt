@@ -35,7 +35,7 @@ class HomeMainBannerFragmentDefault : Fragment(), View.OnClickListener {
             R.id.tv_home_main_start -> {
                 //TODO("산책 시작 API 호출")
                 Log.d(TAG, "onClick")
-                WalkApiRepository.postWalkStart(WalkStartData(11.1,22.2))
+                WalkApiRepository.postWalkStart(WalkStartData(11.1,22.2),mainViewModel)
                 mainViewModel.setHomeMainBannerState(1)
 
             }
