@@ -33,10 +33,13 @@ class HomeMainBannerFragmentDefault : Fragment(), View.OnClickListener {
         when(v?.id) {
             R.id.iv_home_main_start,
             R.id.tv_home_main_start -> {
-                //TODO("산책 시작 API 호출")
                 Log.d(TAG, "onClick")
-                WalkApiRepository.postWalkStart(WalkStartData(11.1,22.2),mainViewModel)
-                mainViewModel.setHomeMainBannerState(1)
+
+                val locationItem = mainViewModel.getCurrentLocation()
+                if (locationItem != null) {
+                    WalkApiRepository.postWalkStart(WalkStartData(locationItem.latitude, locationItem.longitude),mainViewModel)
+                    mainViewModel.setHomeMainBannerState(1)
+                }
 
             }
         }

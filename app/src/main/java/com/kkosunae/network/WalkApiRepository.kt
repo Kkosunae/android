@@ -1,6 +1,7 @@
 package com.kkosunae.network
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kkosunae.GlobalApplication
@@ -133,6 +134,32 @@ object WalkApiRepository {
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     Log.d(TAG, "onFailure : $t")
 
+                }
+            })
+    }
+    fun getWalkStatus(mainViewModel: MainViewModel) {
+        retrofit().getWalkStatus()
+            .enqueue(object :Callback<WalkStateData> {
+                override fun onResponse(call: Call<WalkStateData>, response: Response<WalkStateData>) {
+                    if (response.isSuccessful.not()) {
+                        Log.d(TAG, "onResponse : " + response.message())
+                        mainViewModel.setHomeMainBannerState(1)
+                    } else {
+                        Log.d(TAG, response.headers().toString())
+                        if(response.code() == 200) {
+                            Log.d(TAG, "response code : " + response.code())
+                            // isWalking == true
+                            mainViewModel.setHomeMainBannerState(0)
+                            mainViewModel.setWalkId(response.body()?.id)
+                        } else mainViewModel.setHomeMainBannerState(1)
+
+
+                    }
+                }
+
+                override fun onFailure(call: Call<WalkStateData>, t: Throwable) {
+                    Log.d(TAG, "onFailure : $t")
+                    mainViewModel.setHomeMainBannerState(0)
                 }
             })
     }

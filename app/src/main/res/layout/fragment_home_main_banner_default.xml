@@ -5,52 +5,60 @@
     android:id="@+id/home_main_fragment_default"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_mainbanner_background"
     >
+    <ImageView
+        android:id="@+id/iv_home_main_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/img_home_logo"/>
     <TextView
         android:id="@+id/tv_home_main_co"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        android:gravity="end"
-        android:text="집사야..\n좋은 말 할때 산책하자 ㅎㅎ"
-        android:textSize="10dp"
-        android:fontFamily="@font/nanum_b"
-        android:textColor="@color/colorNightBlack"/>
-    <TextView
-        android:id="@+id/tv_home_main_co2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="52dp"
-        android:text="똑바로하개.."
-        android:textSize="7dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_home_main_logo"
+        app:layout_constraintTop_toTopOf="@+id/iv_home_main_logo"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="start"
+        android:text="오늘도\n집사랑 걸어볼까?"
+        android:textSize="12dp"
         android:fontFamily="@font/nanum_b"
         android:textColor="@color/colorBoulderGrey"/>
     <TextView
         android:id="@+id/tv_home_main_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_home_main_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_home_main_logo"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:text="바로 산책하기"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:fontFamily="@font/nanum_b"
         android:textColor="@color/colorNightBlack"/>
-    <ImageView
+
+    <ImageButton
         android:id="@+id/iv_home_main_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tv_home_main_start"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/icon_home_start_vector_small" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/button_start"
+        android:background="@android:color/transparent"/>
+    <ImageButton
+        android:id="@+id/iv_home_main_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/button_end"
+        android:background="@android:color/transparent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

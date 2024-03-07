@@ -34,7 +34,10 @@ class HomeMainBannerFragmentStart : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.home_main_state_stop_button -> {
-                WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),11.1,22.2))
+                var location = mainViewModel.getCurrentLocation()
+                if (location != null) {
+                    WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),location.latitude, location.longitude))
+                }
                 mainViewModel.setHomeMainBannerState(0)
             }
             R.id.home_main_state_pause_button -> {

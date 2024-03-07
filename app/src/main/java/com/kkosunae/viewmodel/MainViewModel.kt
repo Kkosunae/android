@@ -5,7 +5,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kkosunae.model.LocationItem
 import com.kkosunae.model.TokenItem
+import com.kkosunae.model.WalkStartData
+import com.kkosunae.network.WalkApiRepository
 
 class MainViewModel : ViewModel(){
     private val _currentTab = MutableLiveData<Int>()
@@ -13,6 +16,7 @@ class MainViewModel : ViewModel(){
     private val _homeMainBannerState = MutableLiveData<Int>()
     private val _footCount = MutableLiveData<Int>()
     private val _currentToken = MutableLiveData<TokenItem>()
+    private val _currentLocation = MutableLiveData<LocationItem>()
     private var mWalkId =0
     val currentTab : LiveData<Int>
         get() = _currentTab
@@ -24,11 +28,16 @@ class MainViewModel : ViewModel(){
         get() = _footCount
     val currentToken : LiveData<TokenItem>
         get() = _currentToken
+    val currentLocation : LiveData<LocationItem>
+        get() = _currentLocation
+
     init {
         // home 탭으로 초기화
         Log.d("MainViewModel", "init tab")
         _currentTab.postValue(1)
         _homeMainBannerState.postValue(0)
+        WalkApiRepository.getWalkStatus(this)
+
         _footCount.value = 0
     }
     fun setCurrentTab(index : Int) {
@@ -38,12 +47,14 @@ class MainViewModel : ViewModel(){
         _isLogin.postValue(index)
     }
     fun setHomeMainBannerState(index : Int) {
+        Log.d("MainViewModel", "setHomeMainBannerState $index: ")
         _homeMainBannerState.postValue(index)
     }
     fun setFootCount(value : Int) {
         _footCount.value = value
     }
     fun setWalkId(value :Int?) {
+        Log.d("MainViewModel", "setWalkId $value: ")
         if (value != null)
             mWalkId = value
     }
@@ -68,5 +79,12 @@ class MainViewModel : ViewModel(){
     }
     fun setCurrentToken(token:TokenItem) {
         _currentToken.postValue(token)
+    }
+    fun setCurrentLocation(location : LocationItem) {
+        _currentLocation.postValue(location)
+    }
+    fun getCurrentLocation() : LocationItem? {
+        Log.d("MainViewModel", "${_currentLocation.value}")
+        return _currentLocation.value
     }
 }

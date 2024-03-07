@@ -2,7 +2,6 @@ package com.kkosunae.view.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -19,13 +18,12 @@ import com.kkosunae.adapter.HomeHotPlaceListAdapter
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.adapter.HomeTipsListAdapter
 import com.kkosunae.databinding.FragmentHomeBinding
-import com.kkosunae.model.HomeHotPlaceItem
-import com.kkosunae.model.HomeItem
-import com.kkosunae.model.HomeTipsItem
 import com.kkosunae.viewmodel.MainViewModel
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.kkosunae.model.*
+import com.kkosunae.network.WalkApiRepository
 import com.kkosunae.network.WalkApiRepository.getWalkStatistics
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WalkStatisticActivity
@@ -36,7 +34,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private val TAG = "HomeFragment"
     private val mainViewModel : MainViewModel by activityViewModels()
     private var mFootCount : Int = 0
-    private var mWalkID = 0
+    private var isRunning = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,6 +55,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
         initRecyclerView()
         getWalkStatistics()
         binding.homeWalkNextIv.setOnClickListener(this)
+        binding.ivHomeMainStart.setOnClickListener(this)
+        binding.tvHomeMainStart.setOnClickListener(this)
+
     }
 
     override fun onAttach(context: Context) {
@@ -168,6 +169,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 var intent = Intent(context, WalkStatisticActivity::class.java)
                 startActivity(intent)
             }
+            R.id.iv_home_main_start,
+            R.id.tv_home_main_start -> {
+                Log.d(TAG, "onClick")
+                var locationItem = mainViewModel.getCurrentLocation()
+                if (!isRunning) {
+                    if (locationItem != null) {
+                        WalkApiRepository.postWalkStart(WalkStartData(locationItem.latitude, locationItem.longitude),mainViewModel)
+                        mainViewModel.setHomeMainBannerState(1)
+                    }
+                } else {
+                    if (locationItem != null) {
+                        WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude))
+                    }
+                    mainViewModel.setHomeMainBannerState(0)
+                }
+            }
         }
     }
     private fun initObserver() {
@@ -175,10 +192,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
             Log.d("HomeFragment", "homeMainBannerState observer it : $it")
             when (it) {
                 0 -> {
-                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
+                    binding.ivHomeMainStart.text = "정지"
+                    isRunning = true
+//                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
                 }
                 1 -> {
-                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
+                    binding.ivHomeMainStart.text = "시작"
+                    isRunning = false
+//                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
                 }
             }
         })
@@ -189,5 +210,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
             binding.homeWalkNum.text = it.toString()
             initPieChart()
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        var locationItem = mainViewModel.getCurrentLocation()
+        if (locationItem != null)
+        WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude))
     }
 }

@@ -17,6 +17,9 @@ interface WalkApiService {
 
     @GET("walk/statistics")
     fun getWalkStatistics(): Call<Void>
+
+    @GET("walk/status")
+    fun getWalkStatus(): Call<WalkStateData>
 }
 interface LoginApiService {
     @POST("user/kakaoLogin")

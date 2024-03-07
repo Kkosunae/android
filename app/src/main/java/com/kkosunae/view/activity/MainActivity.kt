@@ -2,6 +2,10 @@ package com.kkosunae.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,10 +16,13 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.kkosunae.R
 import com.kakao.sdk.user.UserApiClient
 import com.kkosunae.databinding.ActivityMainBinding
+import com.kkosunae.model.LocationItem
 import com.kkosunae.view.fragment.*
 import com.kkosunae.viewmodel.MainViewModel
 
@@ -23,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     private val TAG : String = "MainActivity"
     lateinit var binding : ActivityMainBinding
     private val mainViewModel : MainViewModel by viewModels()
-
+    private val locationManager by lazy {
+        getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         binding.mainLayout.setPadding(0, getStatusBarHeight(this), 0, 0)
         setSupportActionBar(binding.mainToolbar)
+        getLatLng()
         initObserver()
         initBottomNavigation()
+
     }
     fun getStatusBarHeight(context : Context) : Int {
         val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
@@ -153,4 +164,26 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        return super.onOptionsItemSelected(item)
 //    }
+    private fun getLatLng() {
+        var hasFindLocationPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        var hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+
+        if(hasFindLocationPermission == PackageManager.PERMISSION_GRANTED && hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                0,
+                0f,
+                locationListener
+            )
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
+        }
+    }
+    private val locationListener = LocationListener { location ->
+        val latitude = location.latitude
+        val longitude = location.longitude
+        mainViewModel.setCurrentLocation(LocationItem(latitude, longitude))
+        Log.d(TAG, "location latitude : $latitude longitude : $longitude")
+    }
 }
