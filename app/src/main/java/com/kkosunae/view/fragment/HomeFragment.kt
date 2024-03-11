@@ -47,6 +47,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         initMenuItem()
         // pirchart
         initPieChart()
+        WalkApiRepository.getWalkStatus(mainViewModel)
         return binding.root
     }
 
@@ -174,15 +175,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 Log.d(TAG, "onClick")
                 var locationItem = mainViewModel.getCurrentLocation()
                 if (!isRunning) {
+                    Log.d(TAG, "!isRunning $locationItem")
                     if (locationItem != null) {
                         WalkApiRepository.postWalkStart(WalkStartData(locationItem.latitude, locationItem.longitude),mainViewModel)
-                        mainViewModel.setHomeMainBannerState(1)
+                        mainViewModel.setHomeMainBannerState(0)
                     }
                 } else {
+                    Log.d(TAG, "isRunning $locationItem")
                     if (locationItem != null) {
-                        WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude))
+                        WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude, 1000))
+                        mainViewModel.setHomeMainBannerState(1)
                     }
-                    mainViewModel.setHomeMainBannerState(0)
                 }
             }
         }
@@ -192,13 +195,27 @@ class HomeFragment : Fragment(), View.OnClickListener {
             Log.d("HomeFragment", "homeMainBannerState observer it : $it")
             when (it) {
                 0 -> {
+                    // 산책 중
                     binding.ivHomeMainStart.text = "정지"
                     isRunning = true
-//                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
+                    binding.tvHomeMainCo.visibility = View.GONE
+                    binding.tvHomeMainStart.visibility = View.GONE
+                    binding.tvHomeMainDistance.visibility = View.VISIBLE
+                    binding.tvHomeMainMinute.visibility = View.VISIBLE
+                    binding.tvHomeMainHour.visibility = View.VISIBLE
+                    binding.tvHomeMainSec.visibility = View.VISIBLE
+                //                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
                 }
                 1 -> {
+                    // 산책 시작 전
                     binding.ivHomeMainStart.text = "시작"
                     isRunning = false
+                    binding.tvHomeMainCo.visibility = View.VISIBLE
+                    binding.tvHomeMainStart.visibility = View.VISIBLE
+                    binding.tvHomeMainDistance.visibility = View.GONE
+                    binding.tvHomeMainMinute.visibility = View.GONE
+                    binding.tvHomeMainHour.visibility = View.GONE
+                    binding.tvHomeMainSec.visibility = View.GONE
 //                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
                 }
             }
@@ -212,10 +229,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop()")
         var locationItem = mainViewModel.getCurrentLocation()
         if (locationItem != null)
-        WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude))
+            WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude, 1000))
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy()")
+        super.onDestroy()
+
     }
 }

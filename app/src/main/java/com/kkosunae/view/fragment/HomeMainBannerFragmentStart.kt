@@ -36,7 +36,7 @@ class HomeMainBannerFragmentStart : Fragment(), View.OnClickListener {
             R.id.home_main_state_stop_button -> {
                 var location = mainViewModel.getCurrentLocation()
                 if (location != null) {
-                    WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),location.latitude, location.longitude))
+                    WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),location.latitude, location.longitude, 1000))
                 }
                 mainViewModel.setHomeMainBannerState(0)
             }

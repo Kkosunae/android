@@ -35,8 +35,7 @@ class MainViewModel : ViewModel(){
         // home 탭으로 초기화
         Log.d("MainViewModel", "init tab")
         _currentTab.postValue(1)
-        _homeMainBannerState.postValue(0)
-        WalkApiRepository.getWalkStatus(this)
+//        _homeMainBannerState.postValue(0)
 
         _footCount.value = 0
     }

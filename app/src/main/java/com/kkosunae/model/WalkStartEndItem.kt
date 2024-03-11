@@ -13,7 +13,8 @@ data class WalkStartResponse(
 data class WalkEndData(
     @SerializedName("walkId") val id : Int,
     @SerializedName("latitude") val latitude : Double,
-    @SerializedName("longitude") val longitude : Double
+    @SerializedName("longitude") val longitude : Double,
+    @SerializedName("distance") val distance : Int,
 )
 data class WalkStateData(
     @SerializedName("id") val id : Int,
