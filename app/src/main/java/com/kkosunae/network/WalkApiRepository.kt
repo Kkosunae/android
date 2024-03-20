@@ -175,7 +175,7 @@ object WalkApiRepository {
 //
 //                            Log.d(TAG, "starttime : $date")
 //                            Log.d(TAG, "hour : $hour, minute : $minute, second : $second")
-                            mainViewModel.setStartTime(startDate)
+                            mainViewModel.setStartTime(staringDate)
                         } else mainViewModel.setHomeMainBannerState(1)
 
 

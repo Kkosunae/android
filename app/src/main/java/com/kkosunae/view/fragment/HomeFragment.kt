@@ -29,6 +29,11 @@ import com.kkosunae.network.WalkApiRepository.getWalkStatistics
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WalkStatisticActivity
 import com.kkosunae.viewmodel.MainViewModel
+import java.text.DateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.concurrent.timer
 
@@ -250,7 +255,29 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onDestroy()
 
     }
+    //startTime = "2024-03-18T13:06:32.024Z"
+    private fun getTime(startTime : String) : Int {
+        val currentDate = LocalDateTime.now()
+        Log.d(TAG, "currentDate : $currentDate")
+        //startTime 에서 년,월,일,시,분,초 추출
+        val year = startTime.substring(0,4)
+        val month = startTime.substring(5,7)
+        val day = startTime.substring(8,10)
+        val hour = startTime.substring(11,13)
+        val minute = startTime.substring(14,16)
+        val second = startTime.substring(17,19)
+        val baseDateTimeStr = "$year-$month-$day $hour:$minute:$second"
+        Log.d(TAG, "baseDateTimeStr : $baseDateTimeStr")
 
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        var startDate = LocalDateTime.parse(baseDateTimeStr, formatter)
+        Log.d(TAG, "startDate : $startDate")
+
+        val secondsDifference = ChronoUnit.SECONDS.between(startDate, currentDate)
+        Log.d(TAG, "secondsDifference : $secondsDifference")
+        Log.d(TAG, "secondsDifference.toInt()*100 : ${secondsDifference.toInt()*100}")
+        return secondsDifference.toInt()*100
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun start() {
         binding.ivHomeMainStart.text = "정지"
@@ -262,12 +289,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.tvHomeMainHour.visibility = View.VISIBLE
         binding.tvHomeMainSec.visibility = View.VISIBLE
         timer?.cancel()
+        val startTime = mainViewModel.getStartTime()
+        time = if (startTime == "") 0 else getTime(startTime)
         timer = timer(period = 10) {
             time ++
-            val mili_second = time % 100
-            val second = (time % 6000) /100
-            val minute = time / 6000
-            val hour = time / (6000*60)
+//            val second = (time % 6000) /100
+//            val minute = time / 6000
+//            val hour = time / (6000*60)
+            val second = (time / 100) % 60
+            val minute = (time / 6000) % 60
+            val hour = (time / 360000) % 60
 //            Log.d(TAG,"mili_second : ${mili_second}, second : ${second}, minute : ${minute}, hour : ${hour}")
             activity?.runOnUiThread {
                 binding.tvHomeMainSec.text = if (second < 10) ":0${second}" else ":${second}"
@@ -289,5 +320,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.tvHomeMainHour.visibility = View.GONE
         binding.tvHomeMainSec.visibility = View.GONE
         timer?.cancel()
+        mainViewModel.setStartTime("")
     }
 }

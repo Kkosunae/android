@@ -21,8 +21,7 @@ class MainViewModel : ViewModel(){
     private val _currentToken = MutableLiveData<TokenItem>()
     private val _currentLocation = MutableLiveData<LocationItem>()
     private var mWalkId = 0
-    @RequiresApi(Build.VERSION_CODES.O)
-    private var mStartTime : LocalDateTime = LocalDateTime.now()
+    private var mStartTime : String = ""
     val currentTab : LiveData<Int>
         get() = _currentTab
     val isLogin : LiveData<Boolean>
@@ -91,14 +90,11 @@ class MainViewModel : ViewModel(){
     fun getWalkId() : Int {
         return mWalkId
     }
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun setStartTime(value :LocalDateTime?) {
+    fun setStartTime(value :String?) {
         Log.d("MainViewModel", "setStartTime $value: ")
-        if (value != null)
-            mStartTime = value
+        mStartTime = value ?: ""
     }
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getStartTime() : LocalDateTime {
+    fun getStartTime() : String {
         return mStartTime
     }
 }
