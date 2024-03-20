@@ -1,6 +1,8 @@
 package com.kkosunae.network
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -15,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 object WalkApiRepository {
     private const val TAG = "WalkStartRepository"
@@ -140,6 +144,7 @@ object WalkApiRepository {
     fun getWalkStatus(mainViewModel: MainViewModel) {
         retrofit().getWalkStatus()
             .enqueue(object :Callback<WalkStateData> {
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onResponse(call: Call<WalkStateData>, response: Response<WalkStateData>) {
                     if (response.isSuccessful.not()) {
                         Log.d(TAG, "onResponse : " + response.message())
@@ -151,6 +156,26 @@ object WalkApiRepository {
                             // isWalking == true
                             mainViewModel.setHomeMainBannerState(0)
                             mainViewModel.setWalkId(response.body()?.id)
+                            var staringDate = response.body()?.startTime
+                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@startingData : $staringDate")
+                            var startDate : LocalDateTime? = LocalDateTime.parse(staringDate?.substring(0,21))
+                            val currentDateTime = LocalDateTime.now()
+
+                            if (startDate != null) {
+                                val dayBetween = ChronoUnit.DAYS.between(currentDateTime, startDate)
+                                Log.d(TAG,"dayBetween : $dayBetween")
+                                if (dayBetween > 0) {
+
+                                }
+                            }
+//                            var date = response.body()?.startTime
+//                            val hour = date?.substring(11,13)
+//                            val minute = date?.substring(14,16)
+//                            val second = date?.substring(17,19)
+//
+//                            Log.d(TAG, "starttime : $date")
+//                            Log.d(TAG, "hour : $hour, minute : $minute, second : $second")
+                            mainViewModel.setStartTime(startDate)
                         } else mainViewModel.setHomeMainBannerState(1)
 
 

@@ -2,9 +2,11 @@ package com.kkosunae.view.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -13,20 +15,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.kkosunae.R
 import com.kkosunae.adapter.HomeHotPlaceListAdapter
 import com.kkosunae.adapter.HomeListAdapter
 import com.kkosunae.adapter.HomeTipsListAdapter
 import com.kkosunae.databinding.FragmentHomeBinding
-import com.kkosunae.viewmodel.MainViewModel
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
 import com.kkosunae.model.*
 import com.kkosunae.network.WalkApiRepository
 import com.kkosunae.network.WalkApiRepository.getWalkStatistics
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WalkStatisticActivity
+import com.kkosunae.viewmodel.MainViewModel
+import java.util.*
+import kotlin.concurrent.timer
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
@@ -35,6 +39,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private val mainViewModel : MainViewModel by activityViewModels()
     private var mFootCount : Int = 0
     private var isRunning = false
+    private var timer : Timer? = null
+    private var time = 0
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,12 +60,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG,"onViewCreated")
         initRecyclerView()
         getWalkStatistics()
         binding.homeWalkNextIv.setOnClickListener(this)
         binding.ivHomeMainStart.setOnClickListener(this)
         binding.tvHomeMainStart.setOnClickListener(this)
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG,"onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG,"onResume")
     }
 
     override fun onAttach(context: Context) {
@@ -190,32 +208,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initObserver() {
         mainViewModel.homeMainBannerState.observe(viewLifecycleOwner, Observer { it ->
             Log.d("HomeFragment", "homeMainBannerState observer it : $it")
             when (it) {
                 0 -> {
                     // 산책 중
-                    binding.ivHomeMainStart.text = "정지"
-                    isRunning = true
-                    binding.tvHomeMainCo.visibility = View.GONE
-                    binding.tvHomeMainStart.visibility = View.GONE
-                    binding.tvHomeMainDistance.visibility = View.VISIBLE
-                    binding.tvHomeMainMinute.visibility = View.VISIBLE
-                    binding.tvHomeMainHour.visibility = View.VISIBLE
-                    binding.tvHomeMainSec.visibility = View.VISIBLE
+                    start()
+
                 //                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
                 }
                 1 -> {
                     // 산책 시작 전
-                    binding.ivHomeMainStart.text = "시작"
-                    isRunning = false
-                    binding.tvHomeMainCo.visibility = View.VISIBLE
-                    binding.tvHomeMainStart.visibility = View.VISIBLE
-                    binding.tvHomeMainDistance.visibility = View.GONE
-                    binding.tvHomeMainMinute.visibility = View.GONE
-                    binding.tvHomeMainHour.visibility = View.GONE
-                    binding.tvHomeMainSec.visibility = View.GONE
+                    stop()
+
 //                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
                 }
             }
@@ -233,13 +240,54 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onStop()
         Log.d(TAG, "onStop()")
         var locationItem = mainViewModel.getCurrentLocation()
-        if (locationItem != null)
-            WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude, 1000))
+//        if (locationItem != null)
+//            WalkApiRepository.postWalkEnd(WalkEndData(mainViewModel.getWalkId(),locationItem.latitude, locationItem.longitude, 1000))
+        stop()
     }
 
     override fun onDestroy() {
         Log.d(TAG, "onDestroy()")
         super.onDestroy()
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun start() {
+        binding.ivHomeMainStart.text = "정지"
+        isRunning = true
+        binding.tvHomeMainCo.visibility = View.GONE
+        binding.tvHomeMainStart.visibility = View.GONE
+        binding.tvHomeMainDistance.visibility = View.VISIBLE
+        binding.tvHomeMainMinute.visibility = View.VISIBLE
+        binding.tvHomeMainHour.visibility = View.VISIBLE
+        binding.tvHomeMainSec.visibility = View.VISIBLE
+        timer?.cancel()
+        timer = timer(period = 10) {
+            time ++
+            val mili_second = time % 100
+            val second = (time % 6000) /100
+            val minute = time / 6000
+            val hour = time / (6000*60)
+//            Log.d(TAG,"mili_second : ${mili_second}, second : ${second}, minute : ${minute}, hour : ${hour}")
+            activity?.runOnUiThread {
+                binding.tvHomeMainSec.text = if (second < 10) ":0${second}" else ":${second}"
+                binding.tvHomeMainMinute.text = if (minute < 10) ":0${minute}" else ":${minute}"
+                binding.tvHomeMainHour.text = "$hour"
+            }
+
+
+        }
+    }
+    private fun stop() {
+        binding.ivHomeMainStart.text = "시작"
+        isRunning = false
+        time = 0
+        binding.tvHomeMainCo.visibility = View.VISIBLE
+        binding.tvHomeMainStart.visibility = View.VISIBLE
+        binding.tvHomeMainDistance.visibility = View.GONE
+        binding.tvHomeMainMinute.visibility = View.GONE
+        binding.tvHomeMainHour.visibility = View.GONE
+        binding.tvHomeMainSec.visibility = View.GONE
+        timer?.cancel()
     }
 }

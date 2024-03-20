@@ -1,6 +1,7 @@
 package com.kkosunae.model
 
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDateTime
 
 data class WalkStartData(
     @SerializedName("latitude") val latitude : Double,
