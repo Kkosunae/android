@@ -59,7 +59,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         initMenuItem()
         // pirchart
         initPieChart()
-        WalkApiRepository.getWalkStatus(mainViewModel)
         return binding.root
     }
 
@@ -81,6 +80,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         Log.d(TAG,"onResume")
+        WalkApiRepository.getWalkStatus(mainViewModel)
     }
 
     override fun onAttach(context: Context) {
@@ -220,14 +220,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 0 -> {
                     // 산책 중
                     start()
-
-                //                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
+                    // childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentDefault()).commit()
                 }
                 1 -> {
                     // 산책 시작 전
                     stop()
-
-//                    childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
+                    // childFragmentManager.beginTransaction().replace(R.id.home_main_container, HomeMainBannerFragmentStart()).commit()
                 }
             }
         })
@@ -255,6 +253,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     }
     //startTime = "2024-03-18T13:06:32.024Z"
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getTime(startTime : String) : Int {
         val currentDate = LocalDateTime.now()
         Log.d(TAG, "currentDate : $currentDate")
@@ -298,7 +297,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             val second = (time / 100) % 60
             val minute = (time / 6000) % 60
             val hour = (time / 360000) % 60
-//            Log.d(TAG,"mili_second : ${mili_second}, second : ${second}, minute : ${minute}, hour : ${hour}")
+//            Log.d(TAG,"second : ${second}, minute : ${minute}, hour : ${hour}")
             activity?.runOnUiThread {
                 binding.tvHomeMainSec.text = if (second < 10) ":0${second}" else ":${second}"
                 binding.tvHomeMainMinute.text = if (minute < 10) ":0${minute}" else ":${minute}"
