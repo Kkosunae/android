@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.kkosunae.R
+import com.kkosunae.databinding.FragmentMonthlyBinding
 import com.kkosunae.databinding.FragmentWeekBinding
 import com.kkosunae.view.fragment.placeholder.PlaceholderContent
 import com.kkosunae.viewmodel.WalkStatisticViewModel
@@ -17,9 +18,10 @@ import com.kkosunae.viewmodel.WalkStatisticViewModel
 /**
  * A fragment representing a list of Items.
  */
-class WeekFragment : Fragment() {
-    lateinit var binding: FragmentWeekBinding
+class MonthlyFragment : Fragment() {
+    lateinit var binding: FragmentMonthlyBinding
     private val viewModel : WalkStatisticViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +31,7 @@ class WeekFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWeekBinding.inflate(inflater)
+        binding = FragmentMonthlyBinding.inflate(inflater)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,13 +40,13 @@ class WeekFragment : Fragment() {
     }
     private fun initObserver() {
         viewModel.statisticData.observe(viewLifecycleOwner) {
-            binding.tvWalkCount.text = viewModel.getStatisticData().value?.weekly?.walkCount
-            binding.tvAverageDuration.text = viewModel.getStatisticData().value?.weekly?.averageDuration.toString()
-            binding.tvTotalDuration.text = viewModel.getStatisticData().value?.weekly?.totalDuration.toString()
-            binding.tvMaxDuration.text = viewModel.getStatisticData().value?.weekly?.maxDuration.toString()
-            binding.tvAverageDistance.text = viewModel.getStatisticData().value?.weekly?.averageDistance.toString()
-            binding.tvTotalDistance.text = viewModel.getStatisticData().value?.weekly?.totalDistance.toString()
-            binding.tvMaxDistance.text = viewModel.getStatisticData().value?.weekly?.maxDistance.toString()
+            binding.tvWalkCount.text = viewModel.getStatisticData().value?.monthly?.walkCount
+            binding.tvAverageDuration.text = viewModel.getStatisticData().value?.monthly?.averageDuration.toString()
+            binding.tvTotalDuration.text = viewModel.getStatisticData().value?.monthly?.totalDuration.toString()
+            binding.tvMaxDuration.text = viewModel.getStatisticData().value?.monthly?.maxDuration.toString()
+            binding.tvAverageDistance.text = viewModel.getStatisticData().value?.monthly?.averageDistance.toString()
+            binding.tvTotalDistance.text = viewModel.getStatisticData().value?.monthly?.totalDistance.toString()
+            binding.tvMaxDistance.text = viewModel.getStatisticData().value?.monthly?.maxDistance.toString()
         }
     }
 }

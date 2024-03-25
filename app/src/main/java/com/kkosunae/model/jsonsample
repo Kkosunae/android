@@ -1,0 +1,44 @@
+{
+    "total": {
+        "walkCount": "13",
+        "averageDuration": "44488.424230769231",
+        "totalDuration": "578349.515000",
+        "maxDuration": "528096.061000",
+        "averageDistance": 2123.4615384615386,
+        "totalDistance": 27605,
+        "maxDistance": 9898
+    },
+    "recent": {
+        "id": 26,
+        "startTime": "2024-03-03T14:49:49.947Z",
+        "endTime": "2024-03-03T14:50:06.889Z",
+        "isWalking": false,
+        "startLatitude": 1.11,
+        "startLongitude": 2.22,
+        "endLatitude": 1.898641,
+        "endLongitude": 2.241872,
+        "distance": 1547,
+        "createdAt": "2024-03-03T14:49:49.949Z",
+        "updatedAt": "2024-03-03T14:50:06.890Z",
+        "user_id": 1,
+        "duration": 16
+    },
+    "weekly": {
+        "walkCount": "0",
+        "averageDuration": null,
+        "totalDuration": null,
+        "maxDuration": null,
+        "averageDistance": null,
+        "totalDistance": null,
+        "maxDistance": null
+    },
+    "monthly": {
+        "walkCount": "12",
+        "averageDuration": "48195.001750000000",
+        "totalDuration": "578340.021000",
+        "maxDuration": "528096.061000",
+        "averageDistance": 2261.6666666666665,
+        "totalDistance": 27140,
+        "maxDistance": 9898
+    }
+}

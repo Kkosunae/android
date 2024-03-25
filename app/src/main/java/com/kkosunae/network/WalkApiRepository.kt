@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder
 import com.kkosunae.GlobalApplication
 import com.kkosunae.model.*
 import com.kkosunae.viewmodel.MainViewModel
+import com.kkosunae.viewmodel.WalkStatisticViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -124,18 +125,22 @@ object WalkApiRepository {
 
             })
     }
-    fun getWalkStatistics() {
+    fun getWalkStatistics(viewModel : WalkStatisticViewModel) {
         retrofit().getWalkStatistics()
-            .enqueue(object :Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            .enqueue(object :Callback<WalkStatisticData> {
+                override fun onResponse(call: Call<WalkStatisticData>, response: Response<WalkStatisticData>) {
                     if (response.isSuccessful.not()) {
                         Log.d(TAG, "onResponse : " + response.message())
                     } else {
-                        Log.d(TAG, response.headers().toString())
+                        Log.d(TAG, response.body().toString())
+                        Log.d(TAG, "onResponse : " + response.message())
+                        viewModel.setStatisticData(
+                            WalkStatistic(response.body()!!.total,response.body()!!.recent,response.body()!!.weekly, response.body()!!.monthly)
+                        )
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<WalkStatisticData>, t: Throwable) {
                     Log.d(TAG, "onFailure : $t")
 
                 }

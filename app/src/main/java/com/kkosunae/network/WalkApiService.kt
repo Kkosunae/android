@@ -16,7 +16,7 @@ interface WalkApiService {
     fun postWalkEnd(@Body request: WalkEndData): Call<Void>
 
     @GET("walk/statistics")
-    fun getWalkStatistics(): Call<Void>
+    fun getWalkStatistics(): Call<WalkStatisticData>
 
     @GET("walk/status")
     fun getWalkStatus(): Call<WalkStateData>

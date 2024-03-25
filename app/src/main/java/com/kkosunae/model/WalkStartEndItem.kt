@@ -19,5 +19,12 @@ data class WalkEndData(
 )
 data class WalkStateData(
     @SerializedName("id") val id : Int,
-    @SerializedName("startTime") val startTime : String
+    @SerializedName("startTime") val startTime : String,
+)
+
+data class WalkStatisticData(
+    @SerializedName("total") val total : Total,
+    @SerializedName("recent") val recent : Recent,
+    @SerializedName("weekly") val weekly : Weekly,
+    @SerializedName("monthly") val monthly : Monthly,
 )

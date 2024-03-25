@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.WeekFragment">
+    tools:context=".view.fragment.TotalStatisticFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -52,16 +52,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="average_duration"/>
-                <TextView
-                    android:id="@+id/tv_average_duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="average_duration"/>
+            <TextView
+                android:id="@+id/tv_average_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -78,22 +78,22 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="total_duration"/>
-                <TextView
-                    android:id="@+id/tv_total_duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="total_duration"/>
+            <TextView
+                android:id="@+id/tv_total_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_max_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:id="@+id/cv_max_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp">
@@ -130,16 +130,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="average_distance"/>
-                <TextView
-                    android:id="@+id/tv_average_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="average_distance"/>
+            <TextView
+                android:id="@+id/tv_average_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -156,16 +156,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="total_distance"/>
-                <TextView
-                    android:id="@+id/tv_total_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="total_distance"/>
+            <TextView
+                android:id="@+id/tv_total_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -182,18 +182,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="max_distance"/>
-                <TextView
-                    android:id="@+id/tv_max_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N/A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="max_distance"/>
+            <TextView
+                android:id="@+id/tv_max_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </FrameLayout>

@@ -67,7 +67,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG,"onViewCreated")
         initRecyclerView()
-        getWalkStatistics()
         binding.homeWalkNextIv.setOnClickListener(this)
         binding.ivHomeMainStart.setOnClickListener(this)
         binding.tvHomeMainStart.setOnClickListener(this)
