@@ -2,17 +2,11 @@ package com.kkosunae.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.kkosunae.R
 import com.kkosunae.databinding.FragmentMonthlyBinding
-import com.kkosunae.databinding.FragmentWeekBinding
-import com.kkosunae.view.fragment.placeholder.PlaceholderContent
 import com.kkosunae.viewmodel.WalkStatisticViewModel
 
 /**
