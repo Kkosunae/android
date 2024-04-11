@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -27,6 +28,7 @@ import com.kkosunae.network.RetrofitManager
 import com.kkosunae.view.activity.MainActivity
 import com.kkosunae.view.activity.NotificationActivity
 import com.kkosunae.view.activity.WriteActivity
+import com.kkosunae.viewmodel.MainViewModel
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -37,39 +39,60 @@ import java.io.File
 import java.io.FileInputStream
 
 class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, NaverMap.OnLocationChangeListener{
+    val TAG : String = "MyMapFragment"
+    lateinit var binding: FragmentMapBinding
+    private val mainViewModel : MainViewModel by activityViewModels()
+    private lateinit var mNaverMap: NaverMap
+    private lateinit var mLocationSource: FusedLocationSource
+    private var isFabOpen = false
+    private lateinit var bottomSheetLayout : LinearLayout
+    private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayout>
+    private var mLatitude = 0.0
+    private var mLongitude = 0.0
+    private val marker = Marker()
+
     override fun onLocationChange(p0: Location) {
+        Log.d(TAG, "onLocationChange : $p0")
         p0.latitude
         p0.longitude
         //발자국 조회 api 호출.
     }
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val resultData = data?.getStringExtra("resultKey")
-            // 받아온 데이터 처리
-            Log.d(TAG, "$resultData")
-            val file = File("/Users/dd/development/Kkosunae/app/src/main/res/drawable/sample_img_dog.png")
-            // 발자국 생성 api호출.
-            runBlocking {
-                val result = async {
-                    RetrofitManager.instance.postFootPrint(FootData(resultData, 11.22, 12.22, file))
+            val data: Intent? = result.data ?: null
+            if (data != null) {
+                val resultData = data.getStringExtra("resultKey")
+                val location = LatLng(
+                    data.getDoubleExtra("position_lat", 0.0),
+                    data.getDoubleExtra("position_long", 0.0)
+                )
+                // 받아온 데이터 처리
+                Log.d(TAG, "$resultData")
+                val file =
+                    File("/Users/dd/development/Kkosunae/app/src/main/res/drawable/sample_img_dog.png")
+                // 발자국 생성 api호출.
+                runBlocking {
+                    val result = async {
+                        RetrofitManager.instance.postFootPrint(
+                            FootData(
+                                resultData,
+                                11.22,
+                                12.22,
+                                file
+                            )
+                        )
+                    }
+                    result.await()
                 }
-                result.await()
+                makeOverlay(location)
             }
-
         }
     }
     private fun startWriteActivity() {
         val intent = Intent(activity, WriteActivity::class.java)
         launcher.launch(intent)
     }
-    val TAG : String = "MyMapFragment"
-    lateinit var binding: FragmentMapBinding
-    private lateinit var mNaverMap: NaverMap
-    private lateinit var mLocationSource: FusedLocationSource
-    private var isFabOpen = false
-    private lateinit var bottomSheetLayout : LinearLayout
-    private lateinit var bottomSheetBehavior :BottomSheetBehavior<LinearLayout>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,6 +100,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Nave
     ): View? {
         Log.e(TAG,"onCreateView()")
         binding = FragmentMapBinding.inflate(inflater)
+        initObserver()
         initBottomSheet()
         mLocationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         val menuHost: MenuHost = requireActivity()
@@ -97,7 +121,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Nave
         super.onViewCreated(view, savedInstanceState)
         Log.e(TAG,"onViewCreated()")
         val options = NaverMapOptions()
-            .camera(CameraPosition(LatLng(37.496486063, 127.028361548),  10.0))  // 카메라 위치 (위도,경도,줌)
+            .camera(CameraPosition(LatLng(mLatitude, mLongitude),  10.0))  // 카메라 위치 (위도,경도,줌)
             .mapType(NaverMap.MapType.Basic)    //지도 유형
             .enabledLayerGroups(NaverMap.LAYER_GROUP_BUILDING)  //빌딩 표시
 
@@ -119,6 +143,18 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Nave
 //            toggleFab()
 //        }
         initRecyclerView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    private fun initObserver() {
+        mainViewModel.currentLocation.observe(viewLifecycleOwner){
+            Log.d(TAG,"currentLocation.observe : $it")
+            mLatitude = it.latitude
+            mLongitude = it.longitude
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -168,13 +204,14 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Nave
         location.map = naverMap
 
         locationOverlay.isVisible = true
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4964860636, 127.028361548))
+        Log.d(TAG, "onMapReady_cameraupdate lat: $mLatitude, long : $mLongitude")
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(mLatitude, mLongitude))
             .animate(CameraAnimation.Fly, 1000)
         mNaverMap.moveCamera(cameraUpdate)
 
-        val marker = Marker()
-        marker.position = LatLng(37.4964860636, 127.028361548)
-        marker.map = mNaverMap
+//        val marker = Marker()
+//        marker.position = LatLng(mLatitude+0.01, mLongitude+0.01)
+//        marker.map = mNaverMap
     }
 
     private fun initRecyclerView() {
@@ -250,6 +287,19 @@ class MyMapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, Nave
         when (v?.id) {
 
         }
+    }
+    private fun makeOverlay(latLng: LatLng) {
+        Log.d(TAG,"makeOverlay_position : $latLng")
+        if (latLng.latitude != 0.0 || latLng.longitude != 0.0) {
+            marker.position = LatLng(latLng.latitude, latLng.longitude)
+            marker.map = mNaverMap
+        } else {
+            Log.d(TAG,"makeOverlay_position_else : $mLatitude,$mLongitude")
+            marker.position = LatLng(mLatitude,mLongitude)
+            marker.map = mNaverMap
+        }
+
+
     }
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000

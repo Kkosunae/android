@@ -76,7 +76,8 @@ class MainViewModel : ViewModel(){
         _currentToken.postValue(token)
     }
     fun setCurrentLocation(location : LocationItem) {
-        _currentLocation.postValue(location)
+        Log.d("MainViewModel", "setCurrentLocation : ${_currentLocation.value}")
+        _currentLocation.value = location
     }
     fun getCurrentLocation() : LocationItem? {
         Log.d("MainViewModel", "${_currentLocation.value}")
